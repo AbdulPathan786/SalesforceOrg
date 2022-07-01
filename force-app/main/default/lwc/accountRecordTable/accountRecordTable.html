@@ -1,0 +1,21 @@
+<template>
+  <lightning-card title="Account Records" icon-name="custom:custom63">
+      <div class="slds-m-around_medium">
+          <template if:true={lstRecords.data}>
+              <lightning-datatable
+                    key-field="Id"
+                    data={lstRecords.data}
+                    columns={columns}
+                    hide-checkbox-column
+                    onsave={handleSave}
+                    draft-values={draftValues}
+                    onrowaction={handleRowAction}
+                >
+              </lightning-datatable>
+          </template>
+          <template if:true={lstRecords.error}>
+              <!-- handle Apex error -->
+          </template>
+      </div>
+  </lightning-card>
+</template>

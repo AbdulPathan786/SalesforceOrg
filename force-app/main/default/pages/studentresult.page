@@ -1,0 +1,49 @@
+<apex:page controller="StudentResultController" lightningStylesheets="true" standardStylesheets="true">
+    <apex:slds />
+    <apex:form >
+        <apex:sectionHeader title="Student Details"/>
+        <apex:pageBlock >
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Name of the Student">Student Name</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Fee Deposited">Fee Deposited</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Hobbies">Hobbies</div>
+                        </th>                        
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <apex:repeat value="{!lstStudent}" var="obj"> 
+                        <tr class="slds-hint-parent">
+                            <td data-label="Student Name">
+                                <div class="slds-truncate" title="Cloudhub">{!obj.Name}</div>
+                            </td>
+                            <td data-label="Fee Deposied">
+                                <div class="slds-truncate" title="Fee">{!obj.Fee__c}</div>
+                            </td>
+                            <td data-label="Hobbies">
+                                <div class="slds-truncate" title="Hobbies">{!obj.Hobbies__c}</div>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                </tbody>
+                
+                <tFoot>
+                    <apex:repeat value="{!lstAggregareResult}" var="agg"> 
+                        <tr class="slds-line-height_reset">
+                            <td>Count : {!agg['cnt']}</td>
+                            <td>Max Fee : {!agg['Max']}</td>
+                            <td>Popular Hobbie : {}</td>
+                        </tr>
+                    </apex:repeat>
+                </tFoot>
+            </table>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

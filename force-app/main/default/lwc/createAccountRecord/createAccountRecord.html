@@ -1,0 +1,56 @@
+<template>
+    <lightning-card title="Create New Account Record" icon-name="standard:record">
+      
+            <template if:true={isErrorMessage}>
+                <div class="slds-m-around_small">
+                    <p style="color: red;  text-align: center;">{message}</p>
+                </div>
+            </template>
+       <div class="slds-m-around_medium">
+            <template if:true={isVisible}>
+                <lightning-input 
+                    label="Id" 
+                    value={accountId}
+                    disabled
+                ></lightning-input>
+            </template>
+
+           <lightning-input 
+                data-id="texName"
+                label="Account Name" 
+                type="text"
+                placeholder="Enter Account Name"
+            ></lightning-input>
+
+            <lightning-input 
+                data-id="texPhone"
+                label="Account Phone" 
+                type="Phone"
+                placeholder="Enter Phone Number"
+            ></lightning-input>
+            
+            <lightning-input 
+                data-id="texBillingCity"
+                label="Account City" 
+                type="text"
+                placeholder="Enter City"
+            ></lightning-input>
+       </div>
+            <div class="slds-m-around_small">
+                <template if:true={buttonIcon}>
+                    <lightning-button
+                            class="slds-m-left_x-small"
+                            label="Save" 
+                            variant="success" 
+                            onclick={accountSave}
+                    ></lightning-button>
+                </template>
+                <lightning-button
+                        class="slds-m-left_x-small"
+                        label="Clear" 
+                        variant="brand" 
+                        onclick={handleClear}
+                ></lightning-button>
+            </div> 
+    </lightning-card>
+</template>

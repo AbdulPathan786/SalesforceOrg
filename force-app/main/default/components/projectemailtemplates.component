@@ -1,0 +1,38 @@
+<apex:component controller="ProjectEmailTemplatesController" access="global">
+    <head>
+        <apex:slds ></apex:slds>
+    </head>
+    <apex:attribute name="idProject" description="This is the value for the component." type="String" assignTo="{!projectId}"/>
+    <apex:attribute name="booleanProjectTask" description="Thissdcfvdvd s." type="Boolean" assignTo="{!projectTaskBoolean}"/>
+    <blockquote>
+        <apex:variable var="count" value="{!1}"/>
+        <table   border="2" >
+            <thead>
+                <tr>
+                    <td value="{!count}"> Sr.No.</td>
+                    <th>Project Task Name</th>
+                    <th>Creation Date</th>
+                    <th>Completion Date</th>
+                    <th>Completed By</th>
+                </tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!ProjectTasks}" var="projetcTask">
+                    <tr>  
+                        <td>{!count}<apex:variable value="{!count+1}" var="count" /> </td>
+                        <td>{!projetcTask.Type__c}</td>
+                        <td><apex:outputText value="{0, date, MMMM d',' yyyy}"> 
+                            <apex:param value="{!projetcTask.CreatedDate}" /> 
+                            </apex:outputText>
+                        </td>
+                        <td><apex:outputfield value="{!projetcTask.Completion_Date__c}" /></td>
+                        <td>{!projetcTask.Owner.Name}</td>
+                    </tr>
+                </apex:repeat>
+            </tbody>
+        </table>
+    </blockquote> 
+    <apex:outputPanel rendered="{!projectTaskBoolean}" >
+        Please contact to project task owner {!ProjectTaskName} and complete the project task.
+    </apex:outputPanel>
+</apex:component>

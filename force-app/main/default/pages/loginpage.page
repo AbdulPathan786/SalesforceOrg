@@ -1,0 +1,54 @@
+<apex:page controller="LoginPagesController" showHeader="false" sidebar="false" standardStylesheets="true" lightningStylesheets="true">   
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <head>
+            <apex:slds />
+        </head>
+        <body class="slds-scope">
+            <div class="slds-align_absolute-center"  style="height:30rem">
+                
+                <apex:form >
+                    <!--  User Login Hedear -->
+                    <div style="position:relative;height:30px;width:500px" class="slds-align_absolute-center" >
+                        <div class="slds-builder-center" style="position:relative;height:30px;width:500px" >
+                            <header class="slds-builder-header" style="height:30px">
+                                <div class="slds-align_absolute-center">User Login</div>
+                            </header>
+                        </div>
+                    </div>
+                    
+                    <!-- User Login Page Start -->
+                    <div class="slds-form_stacked" style="border: 1px solid green;heigh:90px;width:500px">
+                        <apex:pageBlock >
+                            <apex:pageMessages ></apex:pageMessages>
+                            <div class="slds-form-element " >
+                                <label class="slds-form-element__label" for="text-input-01">
+                                    <abbr class="slds-required" title="required">* </abbr>User Name</label>
+                                <div class="slds-form-element__control">
+                                    <apex:inputText value="{!textEmail}" style="width:430px" html-placeholder="enter user email"/>
+                                    <!-- <input id="text-input-01" class="slds-input" type="text" value="{!username}" placeholder="Enter UserName" required="true"/> -->
+                                </div>
+                            </div>
+                            
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="text-input-01">
+                                    <abbr class="slds-required" title="required">* </abbr>Password</label>
+                                <div class="slds-form-element__control" >
+                                    <apex:inputsecret value="{!textPassword}" style="width:430px" html-placeholder="enter password" />
+                                </div>
+                            </div>
+                            
+                            
+                            <!-- Command Button-->
+                            <apex:pageBlockButtons location="bottom" >
+                                <apex:commandButton value="Login" action="{!login}"/><br/><br/>
+                                <apex:commandLink value="Signup For New User"  action="{!signup}"  />
+                            </apex:pageBlockButtons>
+                        </apex:pageBlock>
+                    </div>
+                    <!-- User Login Page End-->
+                    
+                </apex:form>
+            </div>
+        </body> 
+    </html>
+</apex:page>

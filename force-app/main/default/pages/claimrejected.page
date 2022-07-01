@@ -1,0 +1,6 @@
+<apex:page standardController="Claim__c" extensions="ClaimsController"  action="{!claimRejected}"  recordSetVar="Claim">
+   <script>
+    alert('Rejected')
+    </script>
+   
+</apex:page>

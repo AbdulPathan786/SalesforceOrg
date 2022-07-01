@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>53.0</apiVersion>
+    <decisions>
+        <name>Check_Lead_Source</name>
+        <label>Check Lead Source</label>
+        <locationX>842</locationX>
+        <locationY>431</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Web</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.LeadSource</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Web</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Detail_field_500</targetReference>
+            </connector>
+            <label>Web</label>
+        </rules>
+        <rules>
+            <name>Phone_Inquiry</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.LeadSource</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Phone Inquiry</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Detail_field_1000</targetReference>
+            </connector>
+            <label>Phone Inquiry</label>
+        </rules>
+        <rules>
+            <name>Partner_Referral</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.LeadSource</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Partner Referral</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Detail_field_1500</targetReference>
+            </connector>
+            <label>Partner Referral</label>
+        </rules>
+        <rules>
+            <name>Purchased_List</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.LeadSource</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Purchased List</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Detail_field_2000</targetReference>
+            </connector>
+            <label>Purchased List</label>
+        </rules>
+        <rules>
+            <name>Other</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.LeadSource</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Other</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Detail_field_2500</targetReference>
+            </connector>
+            <label>Other</label>
+        </rules>
+        <rules>
+            <name>Null_Value</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>$Record.LeadSource</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Detail_field_Null</targetReference>
+            </connector>
+            <label>Null Value</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>isInsert_or_isUpdate</name>
+        <label>isInsert or isUpdate</label>
+        <locationX>1370</locationX>
+        <locationY>311</locationY>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Chech_Insert_or_Update</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>isInsertOrUpdate</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Check_Lead_Source</targetReference>
+            </connector>
+            <label>Chech Insert or Update</label>
+        </rules>
+    </decisions>
+    <description>Session 4</description>
+    <formulas>
+        <name>isInsertOrUpdate</name>
+        <dataType>Boolean</dataType>
+        <expression>isNew() || isChanged({!$Record.LeadSource})</expression>
+    </formulas>
+    <interviewLabel>Details Filed Update {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Contact Details Field Update</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordUpdates>
+        <name>Detail_field_1000</name>
+        <label>Detail field 1000</label>
+        <locationX>314</locationX>
+        <locationY>551</locationY>
+        <inputAssignments>
+            <field>Detail1__c</field>
+            <value>
+                <stringValue>1000</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Detail_field_1500</name>
+        <label>Detail field 1500</label>
+        <locationX>578</locationX>
+        <locationY>551</locationY>
+        <inputAssignments>
+            <field>Detail1__c</field>
+            <value>
+                <stringValue>1500</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Detail_field_2000</name>
+        <label>Detail field 2000</label>
+        <locationX>842</locationX>
+        <locationY>551</locationY>
+        <inputAssignments>
+            <field>Detail1__c</field>
+            <value>
+                <stringValue>2000</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Detail_field_2500</name>
+        <label>Detail field 2500</label>
+        <locationX>1106</locationX>
+        <locationY>551</locationY>
+        <inputAssignments>
+            <field>Detail1__c</field>
+            <value>
+                <stringValue>2500</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Detail_field_500</name>
+        <label>Detail field 500</label>
+        <locationX>50</locationX>
+        <locationY>551</locationY>
+        <inputAssignments>
+            <field>Detail1__c</field>
+            <value>
+                <stringValue>500</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <recordUpdates>
+        <name>Detail_field_Null</name>
+        <label>Detail field Null</label>
+        <locationX>1370</locationX>
+        <locationY>551</locationY>
+        <inputAssignments>
+            <field>Detail1__c</field>
+            <value>
+                <stringValue>00</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>1244</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>isInsert_or_isUpdate</targetReference>
+        </connector>
+        <object>Contact</object>
+        <recordTriggerType>CreateAndUpdate</recordTriggerType>
+        <triggerType>RecordBeforeSave</triggerType>
+    </start>
+    <status>Draft</status>
+</Flow>

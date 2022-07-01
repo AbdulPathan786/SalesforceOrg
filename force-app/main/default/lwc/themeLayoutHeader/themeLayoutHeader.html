@@ -1,0 +1,41 @@
+<template>
+    <header>
+        <a class="logo">
+            <img
+                src="https://1.bp.blogspot.com/-FSJpfNUfiwQ/YVmBlwUDTuI/AAAAAAAABA8/UJWwUNLmi8A-dbv_FAwXhnnOh93BsJiAgCLcBGAsYHQ/s320/logo2.png">
+            <h1>Pathan</h1>
+        </a>
+        <input type="checkbox" id="check">
+        <label for="check">
+            <img src="https://1.bp.blogspot.com/-TQ6sqw09POE/YVmBmHDNLtI/AAAAAAAABBE/h2kA7cyP42gurgfw1OttA8o6-9IFWvm7wCLcBGAsYHQ/s0/menu1.png"
+                class="img1">
+            <img src="https://1.bp.blogspot.com/-7FrNzRkSTfA/YVmBmBWPd1I/AAAAAAAABBA/7ddyu0cIswgmBH3FCqUAuOnCU6Rq5bgbgCLcBGAsYHQ/s0/menu2.png"
+                class="img2">
+        </label>
+        <div class="links">
+            <div>
+                <a onclick={onClickHomePage} data-name="homePage">Home</a>
+                <a onclick={onClickAbout} data-name="about">About</a>
+                <a onclick={onClickBook} data-name="books">Books</a>
+                <a onclick={onClickProfile} data-name="profile">Profile</a>
+                <a onclick={onClickLogin} data-name="login">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <template if:true={isHome}>
+        <c-theme-home-page></c-theme-home-page>
+    </template>
+    <template if:true={isAbout}>
+        <c-theme-about-page></c-theme-about-page>
+    </template>
+    <template if:true={isBooks}>
+        <c-google-books></c-google-books>
+    </template>
+    <template if:true={isProfile}>
+        <c-theme-profile-page></c-theme-profile-page>
+    </template>
+    <template if:true={isLogin}>
+        <h1>login page</h1>
+    </template>
+</template>

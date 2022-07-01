@@ -1,0 +1,153 @@
+<template>
+    <lightning-card title="Contact Records" icon-name="standard:contact">
+        <!--Input Search box and button Start -->
+        <div class="slds-p-bottom_large slds-p-left_large">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <lightning-input data-id="userInput" label="Search User Name" type="search"
+                        placeholder="type here......" onchange={handleClick}></lightning-input>
+                </div>
+                <div class="slds-col slds-m-top_large">
+                   <!--  <lightning-button variant="success" label="Click" onclick={handleClick}></lightning-button> -->
+                </div>
+            </div>
+        </div>
+        <!-- Input Search box and button Close -->
+
+
+        <!--Contact Records display Start -->
+        <template if:true={searchContactRecs}>
+            <template for:each={searchContactRecs} for:item="contactRec">
+                <div key={contactRec.objContact.Id}>
+                    <div class="slds-grid slds-wrap slds-m-around_small">
+                        <div class="slds-col slds-size_1-of-12">
+                             <span if:true={contactRec.conVersionId}><img src={contactRec.conVersionId} width="40" height="40"/> </span>
+                           <!--  <img src={contactRec.objContact.PhotoUrl} height="40" width="50"></img> -->
+                            <span if:false={contactRec.conVersionId}>
+                                <img src={contactRec.objContact.PhotoUrl} height="40" width="50"></img>
+                            </span>
+                        </div>
+                        <div class="slds-col slds-size_2-of-12">
+                            <h1> <b>{contactRec.objContact.Name}</b> </h1>
+                            <p>{contactRec.objContact.Email}</p>
+                        </div>
+                        <div class="slds-col slds-size_7-of-12"></div>
+                        <div class="slds-col slds-size_1-of-12">
+                            <span class="slds-badge slds-theme_success">{contactRec.totalTasks}</span>
+                        </div>
+                        <div class="slds-col slds-size_1-of-12">
+                            <lightning-button-icon-stateful icon-name="action:new" value={contactRec.objContact.Id}
+                                onclick={handleTaskRecords} alternative-text="Like"
+                                style="position:relative;right:66px;bottom:4px;">
+                            </lightning-button-icon-stateful>
+
+                        </div>
+                    </div>
+                    <div class="slds-m-around_small">
+                        <lightning-progress-bar value={contactRec.completedPercentage} size="small">
+                        </lightning-progress-bar>
+                    </div>
+                </div>
+            </template>
+        </template>
+        <!--Contact Records display Close -->
+
+        <!--  ===============Contact Task Record Start / Open Model============== -->
+        <template if:true={isVisible}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close">
+                            <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Tasks Records
+                        </h2>
+                        <!-- Input type box and save button start -->
+
+                        <div class="slds-p-bottom_large slds-p-left_large">
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col">
+                                    <lightning-input data-id="description" name="Input" type="text" label=""
+                                        placeholder="Description..."></lightning-input>
+                                </div>
+                                <div class="slds-col slds-m-top_large">
+                                    <!--  <lightning-button-icon-stateful icon-name="action:new" onclick={handleSave}
+                                        alternative-text="Add" style="position: relative;right: 92px;bottom: 6px;">
+                                    </lightning-button-icon-stateful> -->
+                                    <lightning-icon icon-name="action:new" alternative-text="Click to Call "
+                                        size="small " title="large size" onclick={handleSave}
+                                        style="position: relative;right: 92px;bottom: 12px;"></lightning-icon>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Input type Box and save button Close  -->
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <!-- Data Table Start -->
+                        <template if:true={taskRecords}>
+                            <!--  <lightning-datatable key-field="id" data={taskRecords} columns={columns}>
+                            </lightning-datatable> -->
+                            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <!--  <th class="" scope="col">
+                                            <div class="slds-truncate" title="Task Date">Date</div>
+                                        </th> -->
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Task Action">Action</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Task Description">Description</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Task Status">Status</div>
+                                        </th>
+                                        <th class="" scope="col">
+                                            <div class="slds-truncate" title="Task Delete">Delete</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template for:each={taskRecords} for:item="taskRec" for:index="index">
+                                        <tr class="slds-hint-parent" key={taskRec.Id}>
+                                            <!-- <th data-label="Task Date" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">{taskRec.CreatedDate}</div>
+                                            </th> -->
+                                            <td data-label="Task Description" scope="row">
+                                                    <input type="checkbox" name="options" onclick={completedTaskRecord} data-id={taskRec.Id}
+                                                        aria-labelledby="check-button-label-01 column-group-header" />
+                                            </td>
+                                            <th data-label="Task Description" scope="row">
+                                                <div class="slds-truncate" title="Cloudhub">{taskRec.Description}</div>
+                                            </th>
+                                            <td data-label="Task Status">
+                                                <div class="slds-truncate slds-text-color_destructive" title="Cloudhub">
+                                                    {taskRec.Status}</div>
+                                            </td>
+                                            <td data-label="Task Delete">
+                                                <lightning-icon icon-name="action:delete" alternative-text="Delete"
+                                                    data-id={taskRec.Id} data-index={index} title="Delete"
+                                                    size="x-small" onclick={deleteTask}></lightning-icon>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </template>
+                        <!-- Data Table Close -->
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Cancel" onclick={cancelButton}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+        <!-- User Task Record End Close model  -->
+    </lightning-card>
+</template>

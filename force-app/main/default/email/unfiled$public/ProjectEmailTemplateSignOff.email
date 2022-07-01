@@ -1,0 +1,16 @@
+<messaging:emailTemplate subject="Project Task Sign Off" recipientType="Contact" relatedToType="Project__c">
+<messaging:htmlEmailBody >
+
+Dear / Hi ,&nbsp; {!relatedTo.Project_Owner__r.Name}<br/><br/>
+
+Your Project is deployment status. <br/>
+
+Detail List of your Project. <br/>
+
+<c:projectemailtemplates idProject="{!relatedTo.id}"  booleanProjectTask="true" />
+<br/>
+
+ Thanks
+
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

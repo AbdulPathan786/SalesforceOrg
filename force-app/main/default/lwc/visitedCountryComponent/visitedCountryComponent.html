@@ -1,0 +1,23 @@
+<template>
+    <lightning-card>
+       <div class="slds-m-around_small">
+            <h1><i><b>iBirds Software Services Pvt. Ltd. Ajmer</b></i></h1>
+           <h1><i><b>LWC Assignments : Visited Country</b></i></h1>
+           <h1><i><b>LWC Assignment No : 3</b></i></h1>
+           <h1><i><b>Owner Name : Abdul Pathan</b></i></h1>
+       </div>
+   </lightning-card>
+
+<lightning-card title="Country Detail" icon-name="custom:custom39">
+  <div class="slds-m-around_small"> 
+      <h1><b>Country Visited : {countryName}</b></h1>
+     <h1><b>Totel Count  : {totelCount} </b></h1>
+  </div>
+  
+   <c-visited-child-country-component 
+            onmyfirstcustomevent={handleCustomEvent}
+    >
+   </c-visited-child-country-component>
+
+</lightning-card>
+</template>

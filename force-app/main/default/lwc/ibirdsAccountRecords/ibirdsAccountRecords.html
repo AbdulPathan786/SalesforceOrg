@@ -1,0 +1,22 @@
+<template>
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_6-of-12">
+            <!-- Account Records -->
+            <lightning-card title="Account Records" icon-name="standard:account">
+                <div class="slds-m-around_small">
+                    <template if:true={accountRecords.data}>
+                        <lightning-datatable key-field="Id" data={accountRecords.data} columns={columns}
+                            hide-checkbox-column onrowaction={handleRowAction}>
+                        </lightning-datatable>
+                    </template>
+                </div>
+            </lightning-card>
+        </div>
+        
+
+        <!-- Contact (child) Records-->
+        <div class="slds-col slds-size_6-of-12">
+            <c-ibirds-contact-records account-id={accoundRecordId} account-name={accoundRecordName}></c-ibirds-contact-records>
+        </div>
+    </div>
+</template>

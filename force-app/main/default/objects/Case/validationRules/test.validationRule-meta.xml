@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>test</fullName>
+    <active>true</active>
+    <errorConditionFormula>IF(WEEKDAY(DATEVALUE(ClosedDate)) = 1 || WEEKDAY(DATEVALUE(ClosedDate)) = 7, (TODAY() - DATEVALUE(ClosedDate) &gt; 3),
+	(IF(WEEKDAY(DATEVALUE(ClosedDate)) = 5 || WEEKDAY(DATEVALUE(ClosedDate)) = 6, (TODAY() - DATEVALUE(ClosedDate) &gt; 4),
+		(TODAY() - DATEVALUE(ClosedDate) &gt;= 2)
+		)
+	)
+)</errorConditionFormula>
+    <errorMessage>validation rule.........</errorMessage>
+</ValidationRule>

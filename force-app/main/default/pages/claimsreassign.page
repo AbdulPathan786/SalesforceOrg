@@ -1,0 +1,6 @@
+<apex:page standardController="Claim__c" extensions="ClaimsController"  action="{!reassignClaims}" recordSetVar="Claim">
+   <script>
+    alert('Reassign')
+    </script>
+   
+</apex:page>

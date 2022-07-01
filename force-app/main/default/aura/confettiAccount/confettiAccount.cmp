@@ -1,0 +1,18 @@
+<aura:component  implements="force:appHostable,forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:hasRecordId" access="global" >
+    <lightning:card title="Confetti Account" iconName="standard:account" ></lightning:card>
+    <ltng:require scripts="{!$Resource.Confetti}"/>
+    
+    <aura:attribute name="accountRecord" type="Object" description="A accountRecord view object to be displayed"/>
+    <aura:attribute name="recordLoadError" type="String" description="An error message bound to force:recordData"/>
+    <aura:attribute name="record" type="Object"/>
+    <aura:attribute name="currentVal" type="string" />
+    
+    <force:recordData aura:id="recordLoader"
+                      recordId="{!v.recordId}"
+                      fields="Name,Description,Phone,Industry"
+                      mode="VIEW"
+                      targetFields="{!v.accountRecord}"
+                      targetError="{!v.recordLoadError}"
+                      recordUpdated="{!c.recordUpdated}"
+                      />
+</aura:component>

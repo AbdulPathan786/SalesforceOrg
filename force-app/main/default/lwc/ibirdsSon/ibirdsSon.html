@@ -1,0 +1,57 @@
+<template>
+    <div class="slds-page-header slds-page-header_record-home">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <span class="slds-icon_container slds-icon-standard-account"
+                            title="Description of icon when needed">
+                            <span><img src={flagURL} width="40" height="40" /> </span>
+                            <!-- <svg class="slds-icon" aria-hidden="true">
+                                <use xlink:href="/_slds/icons/standard-sprite/svg/symbols.svg#account"></use>
+                            </svg> -->
+                            <span class="slds-assistive-text">Description of icon when needed</span>
+                        </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span>Son</span>
+                                    <span class="slds-page-header__title slds-truncate"
+                                        title="Acme - 1,200 Widgets">{sonName}</span>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <lightning-card title="Message Receive...">
+        <section role="log" class="slds-chat">
+            <ul class="slds-chat-list">
+                <li class="slds-chat-listitem slds-chat-listitem_outbound">
+                    <div class="slds-chat-message">
+                        <div class="slds-chat-message__body">
+                            <div class="slds-chat-message__text slds-chat-message__text_outbound">
+                                <span>{daughterMessage}</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <div class="slds-m-around_small">
+            <lightning-input type="text" label="Message type" data-id="son" placeholder="type here...">
+            </lightning-input>
+            <lightning-button label="Send Message" variant="success" onclick={handleClick}></lightning-button>
+        </div>
+    </lightning-card>
+
+    <!--   <lightning-input type="text" label="Message type" data-id="grand" placeholder="type here...">
+    </lightning-input>
+    <lightning-button label="Send Message" variant="success" onclick={handleClickGrand}></lightning-button>
+ -->
+</template>

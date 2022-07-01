@@ -1,0 +1,19 @@
+<apex:page standardController="Account" lightningStylesheets="true" > 
+    <apex:includeLightning />
+     <apex:includeScript value="/lightning/lightning.out.js" />
+    <div id="LightCompId"></div> 
+    <script>
+   
+        $Lightning.use("c:auraAndVisualforcePrint", function(){
+            
+            $Lightning.createComponent("c:auraAndVisualforce",{ ContentDocumentId : '0692w000009tRqQAAU' },                     
+                                       "LightCompId", 
+                                       function(){
+                                           console.log('Calling the lwc component'); 
+                                       }
+                                      );
+        }.bind(this));
+   
+    
+    </script> 
+</apex:page>

@@ -1,0 +1,23 @@
+<apex:page controller="DeleteStudentController" lightningStylesheets="true">
+    <apex:form >
+        <apex:sectionHeader title="Student" subtitle="Details" />
+        <apex:pageMessages ></apex:pageMessages> 
+        <apex:pageBlock >
+            <apex:pageBlockSection columns="1" title="Edit Student Page" collapsible="false" >
+                <apex:pageBlockTable value="{!objStudent}" var="objStudent" >
+                    <apex:column value="{!objStudent.LastName__c}" />
+                    <apex:column value="{!objStudent.FirstName__c}" />
+                    <apex:column value="{!objStudent.Email__c}" />
+                    <apex:column value="{!objStudent.ContactNumber__c}" />
+                    <apex:column value="{!objStudent.Fee__c}" />
+                    <apex:column value="{!objStudent.BirthDate__c}" />
+                    <apex:column value="{!objStudent.States__c}" />
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons location="Bottom">
+                <apex:commandButton value="Delete" action="{!DeleteButton}"  />
+                <apex:commandButton value="Cancel" action="{!CancelButton}"  />
+            </apex:pageBlockButtons>
+        </apex:pageBlock> 
+    </apex:form>
+</apex:page>

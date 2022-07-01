@@ -1,0 +1,35 @@
+<template>
+    <lightning-card>
+        <div class="slds-m-around_small">
+             <h1><i><b>iBirds Software Services Pvt. Ltd. Ajmer</b></i></h1>
+            <h1><i><b>LWC Assignments : Contact Search City</b></i></h1>
+            <h1><i><b>LWC Assignment No : 4</b></i></h1>
+            <h1><i><b>Owner Name : Abdul Pathan</b></i></h1>
+        </div>
+    </lightning-card>
+    <lightning-card title="Contact Records" icon-name="standard:contact" >
+		<!--  PickListValue Combobox Show Page Start-->
+        <div class="slds-p-around_small">
+			<lightning-combobox
+				data-id="combobox"
+				name="contacts"
+				label="Selected City Name"
+				placeholder="Choose City Name"
+				value={value}
+				onchange={handleChange}
+				options={cityOptions}>
+			</lightning-combobox>
+		</div>
+		<!--     PickListValue Combobox Show Page End  -->
+        <!--    Contact Data Record Show Table Form Start    -->
+        <div class="slds-m-around_medium" >
+            <lightning-datatable
+                key-field="id"
+                data={lstcontactList.data}
+                columns={columns}
+                hide-checkbox-column>
+            </lightning-datatable>
+        </div>
+		<!--    Contact Data Record Show Table Form Start      -->
+    </lightning-card>
+</template>

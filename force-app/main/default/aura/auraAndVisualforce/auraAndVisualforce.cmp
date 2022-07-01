@@ -1,0 +1,10 @@
+<aura:component implements="force:appHostable,force:hasRecordId,flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes" access="global" >
+	
+       <lightning:button variant="base" label="Base" title="Base action" onclick="{!c.openSingleFile}"/>
+
+    
+    <lightning:card>
+        <lightning:fileCard fileId="0692w000009tRqQAAU" description="Test"/>
+    </lightning:card>
+    
+</aura:component>

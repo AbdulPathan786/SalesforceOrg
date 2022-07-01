@@ -1,0 +1,147 @@
+<template>
+    <div class="slds-page-header slds-page-header_record-home">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <span class="slds-icon_container slds-icon-standard-opportunity" title="opportunity">
+                            <svg class="slds-icon" aria-hidden="true">
+                                <use xlink:href="/_slds/icons/standard-sprite/svg/symbols.svg#opportunity"></use>
+                            </svg>
+                            <span class="slds-assistive-text">opportunity</span>
+                        </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span><b>Opportunities ({oppLenght})</b></span>
+                                    <span class="slds-page-header__title slds-truncate"
+                                        title="Acme - 1,200 Widgets"></span>
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--================================ button icon start =======================================-->
+            <div class="slds-page-header__col-actions">
+                <div class="slds-page-header__controls">
+                    <div class="slds-page-header__control">
+                        <ul class="slds-button-group-list">
+                            <li>
+                                <lightning-button label="New" onclick={handleNewClick}></lightning-button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--============================= button icon end =========================================-->
+        </div>
+    </div>
+    <!--============================= Opportunity Records start======================================== -->
+    <article class="slds-box slds-card">
+        <template if:true={accountRecords} for:each={accountRecords} for:item="acc">
+            <lightning-layout key={acc.Id}>
+                <lightning-layout-item padding="around-small">
+                    <div class="header-column">
+                        <p class="field-title" title="Name">Name</p>
+                        <a href="#">{acc.Name}</a>
+                    </div>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="around-small">
+                    <div class="header-column">
+                        <p class="field-title" title="StageName">StageName</p>
+                        <p>{acc.StageName}</p>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <div class="header-column">
+                        <p class="field-title" title="CloseDate">CloseDate</p>
+                        <p>
+                            <span title="">{acc.CloseDate}</span>
+                        </p>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item padding="around-small">
+                    <div class="header-column">
+                        <p class="field-title" title="Probability">Probability
+                            <lightning-button-menu alternative-text="Show menu">
+                                <lightning-menu-item value={acc.Id} label="Edit" onclick={handleClick}>
+                                </lightning-menu-item>
+                                <lightning-menu-item value="MenuItemTwo" label="Delete" id={acc.Id}>
+                                </lightning-menu-item>
+                            </lightning-button-menu>
+                        </p>
+                        <p>{acc.Probability}</p>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </template>
+    </article>
+    <!--============================= Opportunity Records end======================================== -->
+    <!--=========================== Opportunity Create Model Open =========================================-->
+    <template if:true={isModel}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium"
+            aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close">
+                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Opportunity Record Create</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <!-- lightning record form-->
+                    <lightning-record-edit-form object-api-name="Opportunity" layout-type="Full" columns="2"
+                        onsuccess={handleSuccess}>
+                    </lightning-record-edit-form>
+                    <!-- lightning record form -->
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" variant="brand-outline" title="Primary action with lighter look"
+                        onclick={closeModel}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!--===================== Opportunity Create Model Close ===============================================-->
+    <!--=================================== Opportunity Edit Model start ====================================-->
+    <template if:true={isEditModel}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium"
+            aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close">
+                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-02" class="slds-modal__title slds-hyphenate">Record Edit form Opportunity
+                        Details</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-22">
+                    <!-- lightning record form-->
+                    <lightning-record-form record-id={oppRecordId} object-api-name="Opportunity" layout-type="Full"
+                        columns="2" mode="edit" onsubmit={handleSubmit}>
+                    </lightning-record-form>
+                    <!-- lightning record form -->
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" variant="brand-outline" title="Primary action with lighter look"
+                        onclick={closeModel}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!--===================== Opportunity Edit Model Close =========================================-->
+</template>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Movie__c</columns>
+    <columns>Booking_Date__c</columns>
+    <columns>In_Progress__c</columns>
+    <columns>ShowTime__c</columns>
+    <columns>Total_Amount__c</columns>
+    <columns>Total_Seat__c</columns>
+    <columns>Status__c</columns>
+    <columns>Payment_Type__c</columns>
+    <columns>Cancel_Change_Reason__c</columns>
+    <columns>OWNER.ALIAS</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

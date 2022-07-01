@@ -1,0 +1,14 @@
+<template>
+    <div class="slds-m-around_small">
+        <lightning-card title="Contact Records PubSub"  icon-name="custom:custom63">
+            <div class="slds-m-around_small">
+                <lightning-datatable
+                            key-field= "id"
+                            columns={columns}
+                            data={contacts}
+                            hide-checkbox-column
+                    ></lightning-datatable>
+            </div>
+        </lightning-card>
+    </div>
+</template>

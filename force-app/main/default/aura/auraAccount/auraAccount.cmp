@@ -1,0 +1,46 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="AuraAccountController">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="fields" type="String[]"/>
+    
+    <div class="slds-page-header">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <span class="slds-icon_container slds-icon-standard-contact" title="contact">
+                            <lightning:icon iconName="custom:custom51" title="custom51" />
+                            <span class="slds-assistive-text">Account</span>
+                        </span>
+                    </div>
+                    
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span class="slds-page-header__title slds-truncate" title="Rohde Corp - 80,000 Widgets">Account</span>
+                                </h1>
+                            </div>
+                            
+                        </div>
+                        <p class="slds-page-header__name-meta">Aura Component</p>
+                    </div>
+                    <div class="slds-clearfix">
+                        <div class="slds-float_right">
+                            <lightning:icon iconName="action:refresh" title="refresh" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <lightning:recordForm
+                          aura:id="myRecordForm"
+                          recordId="{!v.recordId}"
+                          objectApiName="Account"
+                          fields="{!v.fields}"
+                          columns="2"
+                          mode="view"
+                          />
+</aura:component>

@@ -1,0 +1,99 @@
+<template>
+	<template if:true={userRecordId}>
+		<div class="slds-page-header">
+			<div class="slds-page-header__row">
+				<div class="slds-page-header__col-title">
+					<div class="slds-media">
+						<div class="slds-media__figure">
+							<span class="slds-avatar slds-avatar_circle">
+								<span class="slds-icon_container slds-icon-standard-user"
+									title="Description of icon when needed">
+									<svg class="slds-icon" aria-hidden="true">
+										<use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#user"></use>
+									</svg>
+									<span class="slds-assistive-text">Description of icon when needed</span>
+								</span>
+							</span>
+						</div>
+						<div class="slds-media__body">
+							<div class="slds-page-header__name">
+								<div class="slds-page-header__name-title">
+									<h1>
+										<span class="slds-page-header__title slds-truncate"
+											title="Rohde Corp - 80,000 Widgets">{userName}</span>
+									</h1>
+								</div>
+							</div>
+							<p class="slds-page-header__name-meta">offline</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="slds-card">
+			<!-- User Chat box Start -->
+			<div class="slds-text-align--right">
+				<section role="log" class="slds-chat">
+					<ul class="slds-chat-list">
+						<template if:true={allChat}>
+							<template for:each={allChat} for:item="chat">
+								<li key={chat.date} if:false={chat.isMyChat}
+									class="slds-chat-listitem slds-chat-listitem_inbound">
+									<div class="slds-chat-message">
+										<span aria-hidden="true"
+											class="slds-avatar slds-avatar_circle slds-chat-avatar">
+											<abbr class="slds-avatar__initials slds-avatar__initials_inverse"
+												title="Taylor Watson-Rice">SA</abbr>
+										</span>
+										<div class="slds-chat-message__body">
+											<div class="slds-chat-message__text slds-chat-message__text_inbound">
+												<span>{chat.message}</span>
+											</div>
+											<div class="slds-chat-message__meta"
+												aria-label="said Taylor Watson-Rice at 4:59 PM">Sartaj •
+												{chat.date}</div>
+										</div>
+									</div>
+								</li>
+								<!-- MY CHAT -->
+								<li key={chat.date} if:true={chat.isMyChat}
+									class="slds-chat-listitem slds-chat-listitem_outbound">
+									<div class="slds-chat-message">
+										<span aria-hidden="true"
+											class="slds-avatar slds-avatar_circle slds-chat-avatar">
+											<abbr class="slds-avatar__initials slds-avatar__initials_inverse"
+												title="Taylor Watson-Rice">AP</abbr>
+										</span>
+										<div class="slds-chat-message__body">
+											<div class="slds-chat-message__text slds-chat-message__text_outbound">
+												<span>{chat.message}
+												</span>
+											</div>
+											<div class="slds-chat-message__meta"
+												aria-label="said Amber Cann at 4:59 PM">Abdul Pathan • {chat.date}
+											</div>
+										</div>
+									</div>
+								</li>
+							</template>
+						</template>
+					</ul>
+				</section>
+			</div>
+			<!-- User Chat box Start -->
+			<!-- Input Box and Icon start -->
+			<div class="slds-grid slds-m-around_small">
+				<div class="slds-col slds-size_11-of-12">
+					<lightning-input type="text" label="typing here...." data-id="textId"></lightning-input>
+				</div>
+				<div class="slds-col slds-size_1-of-12">
+					<lightning-icon style="margin-top:25px" onclick={handleSendMessage} class="pointer"
+						icon-name="utility:send" title="success variant small" size="medium" alternative-text="Success!"
+						variant="success"></lightning-icon>
+				</div>
+			</div>
+			<!-- Input Box and Icon start -->
+		</div>
+	</template>
+</template>

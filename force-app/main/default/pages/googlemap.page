@@ -1,0 +1,94 @@
+<apex:page lightningStylesheets="true" standardStylesheets="false" docType="html-5.0" >
+    <head>
+        <apex:slds />
+        <apex:includescript value="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" />
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        
+        <style>
+            .bground {
+                height: 300px;
+                width: 25%;
+                background-color: dodgerblue;
+                padding: 10px 10px 10px 20px; 
+            }
+        .fas{
+            font-size:20px;color:white;
+            padding: 10px 10px 10px 20px; 
+        }
+        .input{
+            padding-top: 20px;
+            background-color: dodgerblue;
+            border-bottom-style: ridge;color:white;
+            border-bottom-style: ridge;color:white;
+        }
+        .bottomDiv{
+            font-size:20px;color:Black;
+            background-color: grey;
+            height: 200px;
+            width: 25%;
+            padding: 10px 0px 0px 20px;
+        }
+        .routeDiv{
+          font-size:15px;color:Black;
+        }
+        .time{
+         font-size:15px;color:Black;
+        }
+        .fastestRoute{
+         font-size:15px;color:Black;
+        }
+        .slds-input_bare: focus{
+         background-color: grey;
+        }
+        </style>
+        <script>
+            function routing(){
+            $(".buttonClass").click(function(){
+                var attrclass = $(this).find("i").attr("class");
+                $(".bottomDiv").find("i").attr("class",attrclass);  
+            });
+        }
+        /*  
+        $(document).ready(function(){
+            alert.log('abc');
+            $('.input').focus(function(){
+                $(this).css('background-color','lime');
+            });
+        });
+        */
+        </script>
+    </head>
+    
+    <apex:form >
+        <apex:pageblock >
+            <!-- bground start -->
+            <div class="bground" >
+                <apex:commandLink onclick="routing(); return false;" styleclass="buttonClass"> <i class="fas fa-car"></i> </apex:commandLink>
+                <apex:commandLink onclick="routing(); return false;" styleclass="buttonClass"> <i class="fas fa-subway"></i> </apex:commandLink>
+                <apex:commandLink onclick="routing(); return false;" styleclass="buttonClass"> <i class="fas fa-walking"></i> </apex:commandLink>
+                <apex:commandLink onclick="routing(); return false;" styleclass="buttonClass"> <i class="fas fa-bicycle"></i> </apex:commandLink>
+                <apex:commandLink onclick="routing(); return false;" styleclass="buttonClass"> <i class="fas fa-plane" ></i> </apex:commandLink>
+                <!-- input Text Start -->
+                <div class="input"  >
+                    <apex:inputText styleClass="slds-input_bare"  html-placeholder="Choose starting point..."  required="true"  />
+                </div><br />
+                <div class="input">
+                    <apex:inputText styleClass="slds-input_bare"  html-placeholder="Choose destination..."  required="true"  />
+                </div><br />
+                 <apex:commandButton value="Submit" action="{!save}" styleClass="slds-input_bare"/>
+                <!-- input Text End -->
+            </div>
+            <!-- bground End -->
+            <!-- bottomDiv start -->
+            <div class="bottomDiv">
+                <i class="fas fa-plane" ></i>
+                <apex:outputLabel styleClass="routeDiv" ></apex:outputLabel>
+                
+                <div class="time">2 h 40 min</div>
+                <div class="fastestRoute" style="float:left">Fastest route despite the usual traffic</div>
+                <div class="fastestRoute" style="float:right">km </div>
+            </div>                       
+            <!-- bottomDiv End -->
+        </apex:pageblock>
+    </apex:form>
+</apex:page>

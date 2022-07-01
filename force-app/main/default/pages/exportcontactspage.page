@@ -1,0 +1,61 @@
+<apex:page standardController="Account" extensions="ExportContactsCSVController" lightningStylesheets="true" standardStylesheets="true">
+    <!--<apex:sectionHeader title="{!account.name}!" subtitle="Account"/>-->
+    <apex:form >
+        <apex:pageBlock >
+            <!-- <apex:pageBlockSection title="{!$User.FirstName} {!$User.LastName}!" collapsible="false" columns="1">
+You are viewing the <b>{!account.name}</b> account.
+</apex:pageBlockSection>
+-->
+            <apex:pageblockSection title="Multi-Select Values" collapsible="false" columns="2">
+                <apex:outputPanel >
+                    <apex:panelGrid columns="3" id="abcd">
+                        <apex:panelGroup >
+                            <apex:selectList id="sel1" value="{!leftSelected}" multiselect="true" style="width:100px" size="5">
+                                <apex:selectOptions value="{!DeselectedValues}" />
+                            </apex:selectList>
+                        </apex:panelGroup>
+                        <apex:panelGroup ><br/>
+                            <apex:commandButton styleClass="picklistArrowRight" value="add" reRender="sel1">
+                                <apex:actionSupport event="onclick" action="{!getSelect}" />
+                            </apex:commandButton>
+                            <br/><br/>
+                            <apex:commandButton styleClass="picklistArrowLeft" value="remove" reRender="sel2">
+                                <apex:actionSupport event="onclick" action="{!getDeselect}" />
+                            </apex:commandButton>
+                        </apex:panelGroup>
+                        <apex:panelGroup >
+                            <apex:selectList id="sel2" value="{!rightSelected}" multiselect="true" style="width:100px" size="5">
+                                <apex:selectOptions value="{!SelectedValues}" />
+                            </apex:selectList>
+                        </apex:panelGroup>
+                        <apex:panelGroup >
+                            <apex:commandButton value="Submit" action="{!fetchRecords}" reRender="contactsRecord" />
+                        </apex:panelGroup>
+                    </apex:panelGrid>
+                </apex:outputPanel>
+            </apex:pageblockSection>
+            
+            <!-- Contacts Detals and commandButton start -->
+            <apex:pageblockSection title="Contacts Records" collapsible="false" >
+                <apex:panelGrid columns="1">
+                    <apex:panelGroup id="contactsRecord">
+                        <apex:pageBlockTable value="{!lstContact}" var="tab">
+                            <apex:repeat value="{!selectedFieldsList}" var="field">
+                                <apex:column value="{!tab[field]}"/>
+                            </apex:repeat>
+                        </apex:pageBlockTable>
+                    </apex:panelGroup>
+                    <apex:panelGroup >
+                        <apex:commandButton value="Export To CSV" Action="{!ExportToCSV}"/>
+                    </apex:panelGroup>
+                </apex:panelGrid>
+            </apex:pageblockSection>
+             <!-- Contacts Detals and commandButton end -->
+        </apex:pageBlock>
+        <!--
+<apex:pageBlock >
+<apex:commandButton value="Export To CSV" Action="{!ExportToCSV}"/> 
+</apex:pageBlock>
+-->
+    </apex:form>
+</apex:page>

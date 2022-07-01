@@ -1,0 +1,6 @@
+<aura:component controller="claimApprovedRejectComponent" implements="flexipage:availableForAllPageTypes,force:appHostable,force:lightningQuickAction,force:hasRecordId" access="global">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" access="global"/>
+    
+   
+    
+</aura:component>

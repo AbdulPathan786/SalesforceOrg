@@ -1,0 +1,43 @@
+<template>
+    <div class="slds-card">
+        <div class="slds-page-header slds-page-header_record-home">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <span class="slds-icon_container slds-icon-standard-account"
+                                title="Description of icon when needed">
+                                <span><img src={flagURL} width="50" height="50" /> </span>
+                                <!--  <svg class="slds-icon" aria-hidden="true" >
+                                <use xlink:href="/_slds/icons/standard-sprite/svg/symbols.svg#account"></use> 
+                            </svg> -->
+                                <span class="slds-assistive-text">Description of icon when needed</span>
+                            </span>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span>Father</span>
+                                        <span class="slds-page-header__title slds-truncate"
+                                            title="Acme - 1,200 Widgets">{fatherName}</span>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 
+<h1>Son Message : {messageSon}</h1>
+<h1>daughter Message : {messageDaughter}</h1> -->
+        <div class="slds-m-around_small">
+            <c-ibirds-son son-name={sonName} oncallpasstoparentson={sonToParent} daughter-message={messageDaughter}>
+            </c-ibirds-son>
+
+            <c-ibirds-daughter daughter-name={daughterName} oncallpasstoparentdaughter={daughterToParent}
+                son-message={messageSon}></c-ibirds-daughter>
+        </div>
+    </div>
+</template>

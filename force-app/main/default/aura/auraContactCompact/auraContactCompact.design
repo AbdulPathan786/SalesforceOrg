@@ -1,0 +1,8 @@
+<design:component>
+    
+    <design:attribute name="backgroundColor" label="Title" description="Enter Title Color" />
+    <design:attribute name="ShowHeader" label="Show Header" description="Click Check Box" />
+    <design:attribute name="FieldSet" label="Field Set" description="Enter Field Set Name" required="true"/>
+    <design:attribute name="ColumnView" label="Column View" description="Enter Number" />
+    <design:attribute name="SearchString" label="Search" description="Please add Search merge variable" />
+</design:component>

@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Contact Custom Data" icon-name="doctype:image">
+
+        <lightning-tabset variant="scoped">
+            <lightning-tab label={contacts}>
+                <template if:true={contactRecords.data}>
+                    <lightning-datatable key-field="Id" columns={contactColumns} data={contactRecords.data}
+                        hide-checkbox-column>
+                    </lightning-datatable>
+                </template>
+            </lightning-tab>
+        </lightning-tabset>
+    </lightning-card>
+</template>

@@ -1,0 +1,16 @@
+<template>
+    <div class="slds-m-around_small">
+        <lightning-card title="Contact City Combobox" icon-name="custom:custom63">
+            <div class="slds-m-around_small">
+                <lightning-combobox
+                    name="city"
+                    label="Select City"
+                    value={selectedCity}
+                    placeholder="Select City"
+                    options={cityOptions}
+                    onchange={handleChange}
+                 ></lightning-combobox>
+            </div>
+        </lightning-card>
+    </div>
+</template>

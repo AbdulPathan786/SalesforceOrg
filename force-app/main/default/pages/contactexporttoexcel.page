@@ -1,0 +1,9 @@
+<apex:page standardController="Account" extensions="ExportContactsCSVController" contentType="text/plain#files.csv;charset=utf-8;" showheader="false" lightningStylesheets="true" standardStylesheets="true">
+    {!ColumnName}
+    <apex:outputText value="{!newLine}"/>
+    <apex:repeat value="{!ContactRecords}" var="contact">
+        <apex:repeat value="{!ColumnName}" var="column">{!contact[column]},
+        </apex:repeat>
+        <apex:outputText value="{!newLine}"/>
+    </apex:repeat>
+</apex:page>

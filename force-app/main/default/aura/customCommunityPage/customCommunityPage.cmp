@@ -1,0 +1,8 @@
+<aura:component implements="forceCommunity:layout" access="global">    
+    <aura:attribute name="column" type="Aura.Component[]" required="false"/>    
+    <div class="container">
+        <div class="contentPanel">
+            {!v.column}
+        </div>
+    </div>    
+</aura:component>

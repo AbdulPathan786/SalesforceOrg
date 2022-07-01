@@ -1,0 +1,14 @@
+<apex:page controller="StudentSummaryController" tabStyle="Student__c" docType="HTML-5.0" standardStylesheets="true" lightningStylesheets="true">
+    <apex:sectionHeader title="Student" subTitle="Details"/>
+    <apex:form >
+        <apex:pageBlock >
+            <apex:PageBlockSection columns="1" collapsible="true" title="Summary">
+                <apex:outputPanel layout="Block">
+                </apex:outputPanel>
+                
+                                       
+             
+            </apex:PageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

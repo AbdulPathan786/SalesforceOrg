@@ -1,0 +1,63 @@
+<template>
+    <!--Header Start-->
+    <div class="slds-page-header">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <span class="slds-avatar slds-avatar_circle">
+                            <abbr class="slds-avatar__initials slds-icon-standard-user" title="person name">Aqsa</abbr>
+                        </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span class="slds-page-header__title slds-truncate pointer"
+                                        title="Rohde Corp - 80,000 Widgets">Aqsa</span>
+                                </h1>
+                            </div>
+                        </div>
+                        <p class="slds-page-header__name-meta">Online</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Header Start-->
+    <!-- Elisa Message received start -->
+    <template if:true={statusElisa}>
+        <section role="log" class="slds-chat">
+            <ul class="slds-chat-list">
+                <li class="slds-chat-listitem slds-chat-listitem_inbound">
+                    <div class="slds-chat-message">
+                        <span aria-hidden="true" class="slds-avatar slds-avatar_circle slds-chat-avatar">
+                            <abbr class="slds-avatar__initials slds-avatar__initials_inverse"
+                                title="Taylor Watson-Rice">Elisa</abbr>
+                        </span>
+                        <div class="slds-chat-message__body">
+                            <div class="slds-chat-message__text slds-chat-message__text_inbound">
+                                <span>{elisa}</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </template>
+    <!-- Elisa Message received end -->
+    <!-- Input Box and Icon start -->
+    <div class="slds-grid slds-m-around_small">
+        <div class="slds-col slds-size_11-of-12">
+            <lightning-input type="text" label="typing here...." data-id="textId" placeholder="type here...">
+            </lightning-input>
+        </div>
+        <div class="slds-col slds-size_1-of-12">
+            <lightning-icon style="margin-top:25px;margin-left:15px" onclick={handleSendMessage} class="pointer"
+                icon-name="utility:send" title="success variant small" size="medium" alternative-text="Success!"
+                variant="success">
+            </lightning-icon>
+        </div>
+    </div>
+    <!-- Input Box and Icon start -->
+</template>

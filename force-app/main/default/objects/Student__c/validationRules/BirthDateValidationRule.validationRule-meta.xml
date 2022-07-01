@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BirthDateValidationRule</fullName>
+    <active>true</active>
+    <errorConditionFormula>(TODAY()-BirthDate__c)/365 &lt; 16 || 
+ (TODAY()-BirthDate__c)/365 &gt; 25</errorConditionFormula>
+    <errorDisplayField>BirthDate__c</errorDisplayField>
+    <errorMessage>BirthDay is not valid. Age must be in between 16 to 25</errorMessage>
+</ValidationRule>

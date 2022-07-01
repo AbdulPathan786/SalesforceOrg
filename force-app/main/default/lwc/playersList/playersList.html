@@ -1,0 +1,86 @@
+<template>
+    <div class="slds-m-around_small">
+        <lightning-card title="Student Search" icon-name="custom:custom9">
+            <div class="slds-m-around_small">
+                <lightning-input
+                    data-id="txt"
+                    type="text"
+                    name="first"
+                    label="Enter Country Name"
+                ></lightning-input>
+            </div>
+
+            <lightning-button
+                label="click"
+                name="cmdSend"
+                variant="success"
+                slot="actions"
+                value = {searchCountry}
+                onclick={handleChange}
+            ></lightning-button>
+
+
+        </lightning-card>
+    </div>
+
+    <!--    lightning web component second-->
+    <div class="slds-m-around_small">
+        <template for:each = {lstPlayers.data} for:item = "player">
+            <lightning-card key={player.Id} title={player.FirstName__c} icon-name="custom:custom9">
+                <div class="slds-grid slds-wrap slds-m-around_small">
+                    <div class="slds-col slds-size_8-of-12">
+                        <span>Residence in : {player.Country__c}</span>
+                    </div>
+                        <div class="slds-col slds-size_4-of-12">
+                            <span><lightning-button
+                                    label="Show Details"
+                                    name="cmdSend"
+                                    value={player.Id}
+                                    variant="base"
+                                    onclick={showDetails}
+                                    ></lightning-button>
+                            </span>
+                        </div>
+                </div>
+            </lightning-card>
+        </template>
+    </div>
+
+
+
+    <!--    lightning web component third -->
+    <!--  Players Details Show  Start -->
+    <template if:true={modalOpen}>
+    <template for:each={playerInfo} for:item="player">
+        <li key={player.Id}>
+            <lightning-card>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_3-of-12 slds-m-around_small">
+                    <span>
+                       <img src={player.ImageUrl__c} width="200" height="200"/>
+                    </span>
+                </div>
+                <div class="slds-col slds-size_9-of-12">
+                    <p>First Name   : {player.FirstName__c}</p>
+                    <p>Last Name : {player.LastName__c}</p>
+                    <p>Email : {player.Email__c}</p>
+                </div>
+            </div> 
+                <div class="slds-m-around_small">
+                    <lightning-button
+                        label="Close"
+                        name="cmdSend"
+                        value={player.Id}
+                        variant="base"
+                        onclick={closeModal}
+                        slot="footer"
+                    ></lightning-button>
+                </div>
+        </lightning-card>
+        </li>
+    </template>
+    </template>
+    <!--  Players Details Show  End -->
+
+ 
+</template>

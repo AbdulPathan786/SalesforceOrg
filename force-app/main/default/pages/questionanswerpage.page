@@ -1,0 +1,54 @@
+<apex:page lightningStylesheets="true" standardStylesheets="true" controller="QuestionAnswerController">
+    <head>
+        <apex:slds />
+    </head>
+    <div class="slds-align_absolute-center"  style="height:30rem">
+        
+        <apex:form id="pageId" >
+            <div class="slds-form_stacked" style="border: 1px solid green;height:175px;width:600px">
+                <div class="slds-builder-center"  style="background-color:black;height:30px">
+                    <div class="slds-clearfix" >
+                        <div class="slds-float_left" style="color:white;">
+                            <p>Servey Questions</p>
+                        </div>
+                        <div class="slds-float_right" style="color:black;">
+                            <apex:commandButton action="{!logout}" value="Logout"  reRender="pageId" />
+                        </div>
+                    </div>
+                </div>
+                <!-- Question   Answer page Start -->
+                <div class="slds-align_absolute">
+                    <apex:outputPanel >
+                        <apex:repeat value="{!lstSurveyQuestions}" var="question">
+                            <div class="slds-form-element__control" style="background-color:green;">
+                                <span class="slds-form-element__label" style="color:white;">{!question.Question__c}</span>
+                            </div> 
+                            <!-- Options value -->
+                            <apex:selectRadio value="{!Options}" ><br/>
+                                <apex:selectOption itemValue="{!question.OptionA__c}"  itemLabel="{!question.OptionA__c}"   />
+                                <apex:selectOption itemValue="{!question.OptionB__c}" itemLabel="{!question.OptionB__c}"/>
+                                <apex:selectOption itemValue="{!question.OptionC__c}" itemLabel="{!question.OptionC__c}"/>
+                                <apex:selectOption itemValue="{!question.OptionD__c}" itemLabel="{!question.OptionD__c}"/>
+                            </apex:selectRadio><br/>
+                        </apex:repeat>
+                    </apex:outputPanel>
+                </div>
+                <!-- Question   Answer page End -->
+                
+                <!-- Question   Next Button  -->
+                <div class="slds-clearfix">
+                    <div class="slds-float_right">
+                        <apex:commandButton action="{!next}" value="Next"  reRender="pageId" />
+                    </div>
+                </div>
+                
+            </div>
+            <!-- Pie Chart --> 
+            <apex:chart height="300" width="450" data="{!pieData}">
+                <apex:pieSeries dataField="data" labelField="name"/>
+                <apex:legend position="right"/>
+            </apex:chart>
+        </apex:form>
+        
+    </div>
+</apex:page>

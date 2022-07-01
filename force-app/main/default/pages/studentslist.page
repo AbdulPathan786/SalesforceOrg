@@ -1,0 +1,34 @@
+<apex:page controller="StudentsListController" tabStyle="Student__c" docType="HTML-5.0" standardStylesheets="true" lightningStylesheets="true" >
+    <apex:form >
+        <apex:actionFunction name="sendRecordId" action="{!editStudent}" reRender="pgBlockOne">
+            <apex:param name="p1" value="" assignTo="{!recordEditId}"/>            
+        </apex:actionFunction>
+        <apex:actionFunction name="sendRecordIdDelete" action="{!deleteStudent}" reRender="pgBlockOne" >
+            <apex:param name="p2" value="" assignTo="{!recordDeleteId}"/>            
+        </apex:actionFunction>
+        <apex:sectionHeader title="Students" subtitle="List"  />
+        <apex:pageBlock id="pgBlockOne">
+            <apex:variable var="count" value="{!1}"/>
+            <apex:pageBlockTable value="{!lstWrapperStudents}" var="obj">
+                <apex:column headerValue="SNo" value="{!count}"/>              
+                <apex:column headerValue="Action">
+                    <apex:inputCheckbox value="{!obj.selected}"/>
+                </apex:column>
+                <apex:column value="{!obj.objStudent.Id}"/>
+                <apex:column value="{!obj.objStudent.Name}" />
+                <apex:column value="{!obj.objStudent.FullName__c}" />
+                <apex:column value="{!obj.objStudent.Gender__c}" />
+         <!--   <apex:column value="{!obj.objStudent.course__r.course__c}" /> -->
+                <apex:column value="{!obj.objStudent.admissionDate__c}" />    
+                <apex:column headerValue="Days" value="{!obj.days}" />
+                <apex:column headerValue="Button">
+                    <apex:commandButton value="Edit" onclick="sendRecordId('{!obj.objStudent.id}'); return false;" action="{!editStudent}"/> &nbsp;  
+                    <apex:commandButton value="Delete" onclick="sendRecordIdDelete('{!obj.objStudent.id}'); return false;" action="{!deleteStudent}"/>
+                </apex:column>
+                <apex:column >
+                    <apex:variable var="count" value="{!count + 1}"/>                
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,34 @@
+<template>
+    <!--    lightning web component second-->
+    <div class="slds-m-around_small">
+        <lightning-card title="Player record List" icon-name="custom:custom8">
+            <div class="slds-m-around_small">
+                <template if:true={contryValue}>
+                    <template for:each = {contryValue} for:item = "player" >
+                        <lightning-card key={player.Id} title={player.FirstName__c} icon-name="custom:custom9">
+                            <div class="slds-grid slds-wrap slds-m-around_small">
+                                <div class="slds-col slds-size_8-of-12">
+                                    <span>Residence in : {player.Country__c}</span>
+                                </div>
+                                    <div class="slds-col slds-size_4-of-12">
+                                        <span><lightning-button
+                                                label="Show Details"
+                                                name="cmdSend"
+                                                value={player.Id}
+                                                variant="base"
+                                                onclick={showDetails}
+                                                ></lightning-button>
+                                        </span>
+                                    </div>
+                            </div>
+                        </lightning-card>
+                    </template>
+                </template>
+
+                    <template if:true={error}>
+                        <h1>Records Not Found!!!</h1>
+                    </template>
+            </div>
+        </lightning-card>
+    </div>
+</template>

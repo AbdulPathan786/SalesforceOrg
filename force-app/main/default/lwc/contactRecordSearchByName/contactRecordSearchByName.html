@@ -1,0 +1,32 @@
+<template>
+	<lightning-card title="Contact Records" icon-name="standard:contact">
+		<!--======================= Lightning-input and combobox Search  Start ================================-->
+		<div class="slds-grid slds-gutters slds-m-around_small">
+			<div id="inputBox" class="slds-col slds-size_2-of-3 inputBoxcss">
+				<lightning-input data-id="searchInput" type="text" label="Search by Name and City"
+					placeholder="type here..."></lightning-input>
+			</div>
+			<div class="slds-col slds-size_1-of-3 slds-m-around_large buttonClass">
+				<lightning-button label="Click" name="cmdClick" variant="success" onclick={searchForContactRecord}>
+				</lightning-button>
+			</div>
+		</div>
+
+		<!-- ============Contact Data Record Show Table Form Start===================================== -->
+		<template if:true={isStatus}>
+			<template if:true={ListOfContactRecords}>
+				<lightning-datatable key-field="id" data-id="contactTable" data={ListOfContactRecords} columns={columns}
+					hide-checkbox-column default-sort-direction={defaultSortDirection} sorted-direction={sortDirection}
+					sorted-by={sortedBy} onsort={onHandleSort}>
+				</lightning-datatable>
+			</template>
+		</template>
+
+		<!-- ===============Contact record not fount start==================================== -->
+		<template if:false={isStatus}>
+			<div class="slds-align_absolute-center slds-box slds-box_x-small slds-text-heading_medium errorcss">
+				<h1>Contact Record Not Found</h1>
+			</div>
+		</template>
+	</lightning-card>
+</template>

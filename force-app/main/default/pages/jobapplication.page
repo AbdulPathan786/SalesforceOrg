@@ -1,0 +1,19 @@
+<apex:page standardStylesheets="true" lightningStylesheets="true" controller="JobApplicationController" >
+    <apex:form >
+      <apex:sectionHeader title="{!recordName}" />
+        <apex:pageBlock >
+            <apex:pageBlockSection title="JobApplication Summary" collapsible="false"  />
+            
+            <apex:pageBlockTable value="{!Result}" var="Rs" >
+                <apex:column headerValue="City Name">{!Rs['city']}</apex:column>
+                <apex:column headerValue="Count of Candidates">{!Rs['cnt']}</apex:column>
+            </apex:pageBlockTable>
+            
+            <apex:pageBlockButtons location="Bottom">
+                <apex:commandButton value="Previous" action="{!CanselButton}" />
+            </apex:pageBlockButtons>
+            
+        </apex:pageBlock>
+        <apex:pageMessages ></apex:pageMessages>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,44 @@
+<template>
+	<lightning-card>
+		<div class="slds-grid slds-wrap slds-m-around_small">
+			<div class="slds-col slds-size_4-of-12">
+         <!--  input box start -->
+				<lightning-input
+                    label="Search"
+                    type="search"
+                    value={searchKey}
+                    placeholder="type here..."
+                    onchange={handleKeyChange}
+                ></lightning-input>
+        <!--  input box start -->
+			</div>
+			<div class="slds-col slds-size_8-of-12"></div>
+    </div>
+    <!--  Data Table start -->
+    <template if:true={isContactRecs}>
+      <template if:true={contactRecs}>
+        <lightning-datatable
+                key-field="Id"
+                data={contactRecs}
+                columns={columns}
+                hide-checkbox-column
+                default-sort-direction={defaultSortDirection}
+                sorted-direction={sortDirection}
+                sorted-by={sortedBy}
+                onsort={onHandleSort}
+          ></lightning-datatable>
+      </template>
+    </template>
+    <template if:false={isContactRecs}>
+        <p>Contact Record Not Fount</p>
+    </template>
+      <!--  Data Table close -->
+
+		<div class="slds-m-around_small">
+			<p class="slds-m-vertical_medium content">
+          Total records: <b>{totalrecords} </b>
+          Page <b>{currentpage}</b> of <b> {totalpages}</b>
+			</p>
+		</div>
+	</lightning-card>
+</template>

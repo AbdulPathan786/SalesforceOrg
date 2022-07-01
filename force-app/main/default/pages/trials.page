@@ -1,0 +1,196 @@
+<apex:page lightningStylesheets="true" standardStylesheets="true" title="Contacts"  Controller="ContactSearchDemo" tabStyle="Contact" >
+    <apex:sectionHeader title="Contacts" subtitle="Search"/>
+  <!--  <apex:slds /> -->
+    <script type="text/javascript">
+    function showTab(tabName, element){
+        console.log('tabName '+ tabName);
+        console.log('Element '+ element);
+        if(tabName=='first_tab') {
+            document.getElementById('second_tab_header').classList.remove('slds-is-active');     
+            document.getElementById('first_tab_header').classList.add('slds-is-active');
+            
+            document.getElementById('second_tab').classList.remove('slds-show');
+            document.getElementById('second_tab').classList.add('slds-hide');
+            
+            document.getElementById('first_tab').classList.remove('slds-hide');
+            document.getElementById('first_tab').classList.add('slds-show');
+        }
+        else{
+            document.getElementById('first_tab_header').classList.remove('slds-is-active');     
+            document.getElementById('second_tab_header').classList.add('slds-is-active');  
+            
+            document.getElementById('first_tab').classList.remove('slds-show');
+            document.getElementById('first_tab').classList.add('slds-hide');
+            document.getElementById('second_tab').classList.remove('slds-hide');
+            document.getElementById('second_tab').classList.add('slds-show');
+        }
+    }
+    </script>
+    
+    
+    <apex:form id="idfirst">
+        <apex:pageBlock id="myPanel">
+            <!--  attachmentImage  -->
+            <apex:actionFunction name="sendRecordId" action="{!attachmentImage}" reRender="idfirst">
+                <apex:param name="p1" value="" assignTo="{!recordId}"/>
+                <apex:param name="p2" value="" assignTo="{!FirstName}"/>
+                <apex:param name="p3" value="" assignTo="{!LastName}"/>
+            </apex:actionFunction>
+            <apex:actionFunction name="senddeleteId" action="{!deleteRow}" reRender="addRowMultiple">
+                <apex:param name="p4" value="" assignTo="{!deleteId}"/>
+                <apex:param name="p5" value="" assignTo="{!removeRow}"/>
+            </apex:actionFunction>
+            
+            <!--  Searching, Picklist,Save Page  -->
+            <apex:pageBlockSection columns="1" collapsible="false">
+                <apex:pageBlockSectionItem >
+                    <apex:inputText value="{!textSearch}" html-placeholder="LastName and Email" />
+                    <apex:commandButton value="Search" action="{!searchContact}" reRender="idfirst" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="1" collapsible="false">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Selects type"> &nbsp;&nbsp;&nbsp;
+                        <apex:selectList value="{!SelectPicklistValue}" size="1">
+                            <apex:selectOptions value="{!picklist}"/>
+                        </apex:selectList>
+                    </apex:outputLabel>
+                    <apex:commandButton value="Save" action="{!save}" reRender="idfirst" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            
+            <!-- updatePage According Size Page  -->
+            <div align="Right">
+                Display records per page
+                <apex:selectList value="{!record}" size="1">
+                    <apex:selectOption itemLabel="5" itemValue="5" ></apex:selectOption>
+                    <apex:selectOption itemLabel="10" itemValue="10"></apex:selectOption>
+                    <apex:selectOption itemLabel="20" itemValue="20"></apex:selectOption>
+                    <apex:selectOption itemLabel="30" itemValue="30"></apex:selectOption>
+                    <apex:actionSupport event="onchange" reRender="myPanel" action="{!updatePage}"/>
+                </apex:selectList><br/>
+            </div>
+            <apex:pageMessages ></apex:pageMessages>
+            
+            <!--   Show Record Page   -->
+            <apex:outputPanel rendered="{!selectRendered}" >
+                <apex:pageBlockTable id="idsort" value="{!lstWrapperContact}" var="obj"   rendered="{!NOT(ISNULL(lstWrapperContact))}" >
+                    <apex:column headerValue="Action" >
+                        <apex:inputCheckbox value="{!obj.selected}"/>
+                    </apex:column>
+                    <apex:column value="{!obj.objContact.Name}">
+                        <apex:facet name="header">   
+                            <apex:commandLink action="{!sortData}" value="Name{!IF(expressionSort=='Name',IF(DirectionOfSort = 'ASC', '▼', '▲'),'')}" reRender="idsort">
+                                <apex:param value="Name" name="column" assignTo="{!expressionSort}" ></apex:param>
+                            </apex:commandLink>
+                        </apex:facet>
+                    </apex:column>
+                    <apex:column value="{!obj.objContact.Email}">
+                        <apex:facet name="header">   
+                            <apex:commandLink action="{!sortData}" value="Email{!IF(expressionSort=='Email',IF(DirectionOfSort = 'ASC', '▼', '▲'),'')}" reRender="idsort">
+                                <apex:param value="Email" name="column" assignTo="{!expressionSort}" ></apex:param>
+                            </apex:commandLink>
+                        </apex:facet>
+                    </apex:column>
+                    <apex:column value="{!obj.objContact.Account.Name}">
+                        <apex:facet name="header">   
+                            <apex:commandLink action="{!sortData}" value="Account Name{!IF(expressionSort=='Account.Name',IF(DirectionOfSort = 'ASC', '▼', '▲'),'')}" reRender="idsort">
+                                <apex:param value="Account.Name" name="column" assignTo="{!expressionSort}" ></apex:param>
+                            </apex:commandLink>
+                        </apex:facet>
+                    </apex:column>
+                    <apex:column value="{!obj.objContact.Phone}">
+                        <apex:facet name="header">   
+                            <apex:commandLink action="{!sortData}" value="Phone{!IF(expressionSort=='Phone',IF(DirectionOfSort = 'ASC', '▼', '▲'),'')}" reRender="idsort">
+                                <apex:param value="Phone" name="column" assignTo="{!expressionSort}" ></apex:param>
+                            </apex:commandLink>
+                        </apex:facet>
+                    </apex:column>
+                    <apex:column value="{!obj.objContact.Type__c}" />
+                    <apex:column headerValue="Details" >
+                        <apex:commandLink onclick="sendRecordId('{!obj.objContact.Id}'); return false">
+                            <apex:image url="{!$Resource.ContactImage}" width="20px"  />
+                        </apex:commandLink>
+                    </apex:column> 
+                </apex:pageBlockTable>
+            </apex:outputPanel>
+            
+            <!-- Pagination -->
+            <apex:pageblockButtons location="Bottom">
+                <apex:commandButton value="Beginning" action="{!beginning}" disabled="{!disabledPrevious}" reRender="myPanel"/>
+                <apex:commandButton value="Previous" action="{!previous}" disabled="{!disabledPrevious}" reRender="myPanel"/>&nbsp;Page {!pageNumber} of {!totalPages}&nbsp;
+                <apex:commandButton value="Next" action="{!next}" disabled="{!disabledNext}" reRender="myPanel"/>
+                <apex:commandButton value="End" action="{!end}" disabled="{!disabledNext}" reRender="myPanel"/>
+            </apex:pageblockButtons>
+        </apex:pageBlock>
+        
+        <!-- attachmentImage selectedValue -->
+        <apex:pageBlock id="saveRerender" rendered="{!attachRender}">
+            
+            
+            <div class="slds-tabs_card slds-tabs_default">
+                <ul class="slds-tabs_default__nav" role="tablist">
+                    <li id="first_tab_header" class="slds-tabs_default__item slds-is-active" title="First Stage Question" role="presentation">
+                        <a class="slds-tabs_default__link" href="javascript:showTab('first_tab',this);" role="tab" tabindex="-1" aria-selected="true" aria-controls="first_tab" id="first_tab__item">Contact Info</a>
+                    </li>
+                    <li id="second_tab_header" class="slds-tabs_default__item" title="Second Stage Question" role="presentation">
+                        <a class="slds-tabs_default__link" href="javascript:showTab('second_tab',this);" role="tab" tabindex="0" aria-selected="false" aria-controls="second_tab" id="second_tab__item">Family Members</a>
+                    </li>
+                </ul>
+                
+                <!--first tab start -->            
+                <div id="first_tab" class="slds-tabs_default__content slds-Show" role="tabpanel" aria-labelledby="first_tab__item">
+                    <apex:pageMessages ></apex:pageMessages>
+                    <apex:pageBlockSection title="{!attach.Name}" collapsible="false">
+                        <apex:image alt="Image" height="100" width="100" url="{!IF(imageId!=null,URLFOR($Action.Attachment.Download,imageId),URLFOR($Resource.NoImageContact))}" />
+                        <apex:pageBlockSectionItem >
+                            <apex:outputPanel >
+                                <apex:outputLabel value="{!ShowMassage}" />
+                                <apex:selectRadio value="{!Subject}" >
+                                    <apex:selectOption itemValue="Attending" itemLabel="Attending" />
+                                    <apex:selectOption itemValue="Not Attending" itemLabel="Not Attending" />
+                                </apex:selectRadio>
+                                <apex:commandButton action="{!saveTask}" value="Save" reRender="saveRerender" />
+                            </apex:outputPanel>
+                        </apex:pageBlockSectionItem>
+                    </apex:pageBlockSection>
+                </div>
+                <!--first tab end -->
+                <!--second tab start -->
+                <div id="second_tab" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="second_tab__item">
+                    <!--content on second tab whatever --->
+                    <apex:pageBlock id="addRowMultiple">
+                        
+                        <apex:pageBlockSection collapsible="false" title="Child Information" />
+                        <apex:variable var="removeRow" value="{!0}"/> 
+                        <apex:pageMessages ></apex:pageMessages>
+                        <apex:pageBlockTable value="{!lstContactChild}" var="obj">
+                            <apex:column headerValue="FirstName">
+                                <apex:commandButton value="X"  onclick="senddeleteId('{!obj.Id}', {!removeRow}); return false"/>
+                                <apex:inputField value="{!obj.FirstName}"/>
+                            </apex:column>
+                            <apex:column headerValue="LastName">
+                                <apex:inputField value="{!obj.LastName}" required="false" />
+                            </apex:column>
+                            <apex:column headerValue="Email">
+                                <apex:inputField value="{!obj.Email}"/>
+                            </apex:column>
+                            <apex:column headerValue="Phone">
+                                <apex:inputField value="{!obj.Phone}"/>
+                                <apex:variable value="{!removeRow+1}" var="removeRow"/>
+                            </apex:column>
+                            <!--  <apex:inlineEditSupport event="ondblClick" showOnEdit="saveButton" hideOnEdit="editButton" />  -->
+                        </apex:pageBlockTable>
+                        
+                        <apex:pageBlockButtons location="bottom" >
+                            <apex:commandButton action="{!addRow}" value="addRow"   immediate="true" reRender="addRowMultiple"/>
+                            <apex:commandButton action="{!Submit}" value="submit"  reRender="addRowMultiple"/>
+                        </apex:pageBlockButtons>
+                    </apex:pageBlock>
+                </div>
+                <!--second tab end -->
+                
+            </div>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

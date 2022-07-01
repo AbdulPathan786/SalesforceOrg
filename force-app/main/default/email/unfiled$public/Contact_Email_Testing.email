@@ -1,0 +1,7 @@
+hey {!Contact.FirstName} {!Contact.LastName},
+
+    Please check the  {!Account.Name} record update recently
+
+Thanks & Regards
+
+Abdul Pathan

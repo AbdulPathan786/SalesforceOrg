@@ -1,0 +1,13 @@
+<template>
+    <lightning-button label="Fetch Data" onclick={handleFetch}></lightning-button>
+    <template if:true={countryDetails}>
+        <lightning-combobox name="countryName" label="Select Country"  placeholder="Select Country"
+            options={countries} onchange={handleCountryChanges}></lightning-combobox>
+
+        <lightning-combobox name="statesName" label="Select State"  placeholder="Select State"
+            options={states} onchange={handleStateChanges}></lightning-combobox>
+
+            <!-- <lightning-combobox name="CitiesName" label="Select City" placeholder="Select City"
+            options={cities} onchange={handleCityChanges}></lightning-combobox> -->
+    </template>
+</template>

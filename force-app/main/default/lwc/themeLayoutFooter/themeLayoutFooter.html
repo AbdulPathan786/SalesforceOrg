@@ -1,0 +1,56 @@
+<template>
+    <footer class="footer-distributed">
+        <div class="footer-left">
+            <!-- <h3>Company<span>logo</span></h3> -->
+            <div class="slds-m-around_medium">
+                <img src={abdulImage} width="50" height="50">
+            </div>
+            <p class="footer-links">
+                <a onclick={onClickHomePage} data-name="homePage" class="link-1">Home</a>
+                <a onclick={onClickAbout} data-name="about">About</a>
+                <a onclick={onClickContact} data-name="contact">Contact</a>
+                <a onclick={onClickBlog} data-name="blog">Blog</a>
+                <a onclick={onClickPricing} data-name="Pricing">Pricing</a>
+                <a onclick={onClickFaq} data-name="feq">Faq</a>
+
+            </p>
+            <p class="footer-company-name">Pathan Group</p>
+        </div>
+        <div class="footer-center">
+            <div>
+                <i class="fa fa-map-marker"></i>
+                <p><span>V.P.O. Sherani Abad,</span>Pathan Group, Nagaur-341302,</p>
+            </div>
+            <div>
+                <i class="fa fa-phone"></i>
+                <p>+91 9828739916</p>
+            </div>
+            <div>
+                <i class="fa fa-envelope"></i>
+                <p><a href="mailto:abdul.h@ibirdsservices.com">pathan.com</a></p>
+            </div>
+        </div>
+        <div class="footer-right">
+            <p class="footer-company-about">
+                <span>About the company</span>
+                Pathan Limited is a leading global information technology,
+                consulting and business process services company. We harness the power of cognitive computing,
+                hyper-automation, robotics, cloud, analytics and emerging technologies to help our clients adapt
+                to the digital world and make them successful...
+            </p>
+            <div class="footer-icons">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <template if:true={isAbout}>
+        <c-theme-about-page></c-theme-about-page>
+    </template>
+    <template if:true={isContact}>
+        <c-theme-contact-page></c-theme-contact-page>
+    </template>
+</template>

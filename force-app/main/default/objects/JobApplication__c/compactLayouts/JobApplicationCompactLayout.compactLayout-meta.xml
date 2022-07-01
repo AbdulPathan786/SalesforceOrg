@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>JobApplicationCompactLayout</fullName>
+    <fields>Name</fields>
+    <fields>Candidate__c</fields>
+    <fields>Position__c</fields>
+    <fields>Status__c</fields>
+    <fields>TotalRating__c</fields>
+    <label>JobApplicationCompactLayout</label>
+</CompactLayout>

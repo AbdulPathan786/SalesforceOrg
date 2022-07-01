@@ -1,0 +1,37 @@
+<template>
+    <article class="slds-card">
+        <!--  header Start -->
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__figure">
+                    <span class="slds-icon_container slds-icon-action-user" title="user">
+                        <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                            <use xlink:href="/_slds/icons/action-sprite/svg/symbols.svg#user"></use>
+                        </svg>
+                        <span class="slds-assistive-text">user</span>
+                    </span>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span>Users List</span>
+                    </h2>
+                </div>
+            </header>
+        </div>
+        <!-- Input Search box  Start -->
+        <div class="slds-p-bottom_large slds-p-left_large" style="width:500px">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_12-of-12">
+                    <lightning-input data-id="userInput" type="text" placeholder="Type User Name..."
+                        onchange={handleChange}></lightning-input>
+                </div>
+            </div>
+        </div>
+        <!-- users child component -->
+        <c-user user-list={userRecords} onclickicon={sendUserOwnerId} status={isUserRecord}></c-user>
+        <template if:true={openDialBox}>
+            <c-task-list-dialog user-owner-id={ownerId} oncancelbuttonclick={closeDialogBox}>
+            </c-task-list-dialog>
+        </template>
+    </article>
+</template>

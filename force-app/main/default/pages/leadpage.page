@@ -1,0 +1,28 @@
+<apex:page lightningStylesheets="true" standardStylesheets="true" controller="LeadController" tabStyle="Lead" >
+    <apex:form >
+        <apex:sectionHeader title="Lead" />
+        <apex:pageBlock title="Lead Information" id="addRowMultiple">
+            <apex:pageBlockTable value="{!lstLead}" var="c">
+                <apex:column headerValue="FirstName">
+                    <apex:inputField value="{!c.FirstName}"/>
+                </apex:column>
+                <apex:column headerValue="LastName">
+                    <apex:inputField value="{!c.LastName}"/>
+                </apex:column>
+                <apex:column headerValue="Email">
+                    <apex:inputField value="{!c.Email}"/>
+                </apex:column>
+                <apex:column headerValue="Company">
+                    <apex:inputField value="{!c.Company}"/>
+                </apex:column>
+                <apex:column headerValue="Status">
+                    <apex:inputField value="{!c.Status}"/>
+                </apex:column>
+            </apex:pageBlockTable>
+            <apex:pageBlockButtons location="bottom" >
+                <apex:commandButton action="{!addRow}" value="addRow" immediate="true" reRender="addRowMultiple"/>
+                <apex:commandButton action="{!Submit}" value="Submit" />   
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

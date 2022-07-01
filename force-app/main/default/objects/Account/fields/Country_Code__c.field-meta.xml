@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Country_Code__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE( UPPER( BillingCountry ),
+&apos;INDIA&apos;, &apos;IN&apos;,
+&apos;PAKISTAN&apos;,&apos;PAK&apos;,
+&apos;Afghanistan&apos;, &apos;AFG&apos;,
+&apos;Albania&apos;, &apos;ALB&apos;,
+&apos;Algeria&apos;,&apos;DZ&apos;,
+&apos;United States of America&apos;, &apos;US&apos;,
+&apos;Turkey&apos;, &apos;TR&apos;,
+&apos;Thailand&apos;, &apos;TH&apos;,
+&apos;Switzerland&apos;, &apos;CH&apos;,
+&apos;Sri Lanka&apos;, &apos;LK&apos;,
+&apos;South Africa&apos;, &apos;ZA&apos;,
+&apos;Qatar&apos;, &apos;QA&apos;,
+null)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Country Code</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

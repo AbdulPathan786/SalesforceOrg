@@ -1,0 +1,35 @@
+<apex:page standardStylesheets="true" lightningStylesheets="true" controller="JobApplicationListController" tabStyle="JobApplication__c">
+    <apex:form >
+        <apex:sectionHeader title="JobApplication" subtitle="List" />
+        <apex:pageBlock >
+            <apex:variable var="count" value="{!1}"/>
+            
+            <apex:pageBlockTable value="{!lstWrapperJobApplication}" var="obj" >
+                
+                <apex:column value="{!count}"/>
+                <apex:column headerValue="Action">
+                    <apex:inputCheckbox value="{!obj.selected}"/>
+                </apex:column>
+                
+                <apex:column Value="{!obj.objJobApplication.Name}" />
+                <apex:column value="{!obj.objJobApplication.Position__c}"/>
+                <apex:column value="{!obj.objJobApplication.Candidate__c }"/>
+                <apex:column value="{!obj.objJobApplication.Status__c}"/>
+                <apex:column value="{!obj.objJobApplication.NumberOfReviews__c}"/>
+                <apex:column value="{!obj.objJobApplication.AverageRating__c}"/>
+                 <apex:column value="{!obj.objJobApplication.CoverLetter__c}"/>
+                <apex:column value="{!obj.objJobApplication.TotalRating__c}"/>
+                
+                <apex:column >
+                    <apex:commandButton value="Edit" action="{!EditJobApplication}" />&nbsp;
+                    <apex:commandButton value="Delete" action="{!DeleteJobApplication}" />
+                </apex:column>
+                
+                <apex:column >
+                    <apex:variable var="count" value="{!count + 1}"/>                
+                </apex:column>
+            </apex:pageBlockTable>
+            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

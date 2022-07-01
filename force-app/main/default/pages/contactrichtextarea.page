@@ -1,0 +1,7 @@
+<apex:page controller="ContactRichTextArea" lightningStylesheets="true" showHeader="false" applyBodyTag="false">
+    <apex:pageBlock >
+        <apex:pageBlockSection title="Contact Information" collapsible="false">
+            <apex:outputText escape="false" value="{!textStr}"></apex:outputText>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

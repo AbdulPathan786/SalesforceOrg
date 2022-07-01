@@ -1,0 +1,46 @@
+<apex:page controller="StudentTableController" docType="html-5.0" standardStylesheets="true" lightningStylesheets="true" tabStyle="Student__c">
+    <apex:slds />
+    <script>
+    function callMethod(){
+        alert('Are you sure you want to delete or update the records');
+        callAction();
+    }
+    </script> 
+    <apex:form id="frm" >
+        <apex:actionFunction name="callAction" action="{!save}" reRender="frm"/>
+        <apex:sectionHeader title="Student" subtitle="Edit"/>
+        <apex:pageblock id="pgOne" >
+            <apex:pageblockbuttons location="bottom">
+                <apex:commandButton value="Save" onclick="callMethod(); return false;"/>
+            </apex:pageblockbuttons>
+            <table width="100%" border = "1" class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Gender</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <apex:repeat value="{!lstWrapperStudents}" var="obj">
+                        <tr>
+                            <td><apex:inputCheckbox value="{!obj.selected}" /></td>
+                            <td><apex:inputField value="{!obj.objStudent.FirstName__c}"/></td>
+                            <td><apex:inputField value="{!obj.objStudent.LastName__c}"/></td>
+                            <td><apex:inputField value="{!obj.objStudent.Gender__c}"/></td>
+                            
+                        </tr>
+                    </apex:repeat>  
+                    <tr>
+                        <td></td>
+                        <td><apex:inputfield value="{!stuobj.FirstName__c}" /></td>  
+                        <td><apex:inputfield value="{!stuobj.LastName__c}" /></td>  
+                        <td><apex:inputfield value="{!stuobj.Gender__c}"  /></td>    
+                        
+                    </tr>
+                </tbody>
+            </table>    
+        </apex:pageblock>
+    </apex:form>
+</apex:page>

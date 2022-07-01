@@ -1,0 +1,15 @@
+<aura:component implements="forceCommunity:themeLayout" access="global">
+    <!-- <aura:attribute name="search" type="Aura.Component[]"/>
+    <aura:attribute name="sidebarFooter" type="Aura.Component[]"/> -->
+    <div class="slds-grid slds-grid--vertical">
+        <div class="slds-col">
+            <c:themeLayoutHeader/>
+        </div>
+        <div class="slds-col content">
+            {!v.body}
+        </div>
+        <div class="slds-col">
+            <c:themeLayoutFooter/>
+        </div>
+    </div>
+</aura:component>

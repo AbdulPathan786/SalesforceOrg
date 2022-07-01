@@ -1,0 +1,6 @@
+<apex:page standardController="Claim__c" extensions="ClaimsController"  action="{!approvedClaims}"  recordSetVar="Claim">
+   <script>
+    alert('Approved')
+    </script>
+   
+</apex:page>

@@ -1,0 +1,37 @@
+<template>
+	<lightning-card>
+        <div class="slds-m-around_small">
+            <h1><i><b>iBirds Software Services Pvt. Ltd. Ajmer</b></i></h1>
+           <h1><i><b>LWC Assignments :  Selected Country</b></i></h1>
+           <h1><i><b>LWC Assignment No : 2</b></i></h1>
+           <h1><i><b>Owner Name : Abdul Pathan</b></i></h1>
+        </div>
+    </lightning-card>
+	<lightning-card title="Parent Component" icon-name="custom:custom9">
+		<div class="slds-grid slds-gutters slds-m-around_small">
+			<div class="slds-col slds-size_2-of-3 ">
+				<lightning-combobox
+                    data-id="first"
+                    label="Select Country"
+                    name="country"
+                    placeholder="Select Country"
+                    value={value}
+                    options={options}
+            ></lightning-combobox>
+			</div>
+			<div class="slds-col slds-size_1-of-3 slds-m-around_large">
+				<lightning-button
+                        name="cmdSend"
+                        label="Show"
+                        variant="success"
+                        onclick={handleChange}
+            ></lightning-button>
+			</div>
+		</div>
+		
+		<c-selected-child-country-component 
+            select-country-name={selectCountry}
+        ></c-selected-child-country-component>
+		
+	</lightning-card>
+</template>

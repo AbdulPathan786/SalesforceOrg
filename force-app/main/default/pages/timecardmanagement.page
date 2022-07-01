@@ -1,0 +1,221 @@
+<apex:page lightningStylesheets="true" standardStylesheets="true" controller="TimecardManagementController">
+    <!-- Add the static resource to page's <head>  -->
+    <apex:includeScript value="{!$Resource.jQuery }"/>
+    <head>
+        <apex:slds />
+        <style>
+            .timecard-table{
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+            }
+            .timecard-table th, .timecard-table td{
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+            text-align:center;
+            }
+            .timecard-table th{
+            background-color : #e6e6e6;
+            }
+            .timecard-table td input{
+            width : 50px;
+            }
+            .del{
+            cursor : pointer;
+            width:20xp;
+            }
+            
+            .file{
+            cursor : pointer;
+            }
+            .dialog{
+            top: 20%;
+            width:20%;
+            padding:2em;
+            background-color : #fff;
+            border: 1px solid #e6e6e6;
+            display: none; 
+            position: absolute;
+            left: 35%;
+            z-index	:999;
+            }
+        </style>
+        
+        <script>
+         $(document).ready(function(){
+            calculateRow(); 
+            $(document).on("change",".inp-hours",function(e){
+                $('.timecard-table  tr th').each(function(i){
+                    calculateColumn(i);
+                });
+            });
+        });
+        
+        function total(){
+            $('.timecard-table  tr th').each(function(i){
+                calculateColumn(i);
+                calculateRow();
+            });
+            
+        }
+        
+        function calculateColumn(index){
+            if(index > 2){
+                var total = 0;
+                $('.timecard-table  tr').each(function(){
+                    var textvalue = parseFloat($(this).find("td:eq("+index+") input[type='text']").val());
+                    var spanvalue = parseFloat($(this).find("td:eq("+index+")").find("span").text());
+                    // console.log('textvalue: '+textvalue + 'spanvalue'+  spanvalue);
+                    if (!isNaN(textvalue)){
+                        total += textvalue;
+                    }else if(!isNaN(spanvalue)){
+                        total += spanvalue;  
+                    }
+                });
+                index--;
+                $('#Tot  td').eq(index).text(total);
+            }
+        }
+        
+        function calculateRow(){
+              $(".inp-hours").change(function(){
+                let row = $(this).closest("tr");
+                let total = 0.0;
+                $(row).find(".inp-hours").each(function(){
+                    if(!isNaN(parseFloat($(this).val())))
+                        total += parseFloat($(this).val());
+                });
+                row.find(".total-hours").text(total);
+                //console.log(total);
+            });
+           
+            /*  $(".file").click(function(){
+                $(".dialog").show();
+                $(".overlay").show();
+            });
+           */
+            
+        }
+        
+        function openDialog(textAreaValue){
+            $(".dialog").show();
+            $(".overlay").show();
+            console.log(textAreaValue);
+            $(".textAreaClass").val(textAreaValue);
+        }
+        function saveDesc(){
+            $(".dialog").hide();
+            $(".overlay").hide();
+        }
+        function cancelDesc(){
+            $(".dialog").hide();
+            $(".overlay").hide();
+        }
+        
+        </script>      
+    </head>
+    <apex:sectionHeader title="MicroSoft" subtitle="Timecard Management" />
+    <div class="slds-scope">
+        <apex:Form id="frm">
+            <apex:actionFunction action="{!refreshTimecard}" name="refreshTimecard"  status="refresh" reRender="timecardSectionRender" oncomplete="calculateRow();total();" />
+            <apex:actionFunction action="{!saveDescrip}" name="saveDescription"  status="refresh" reRender="dialog">
+                <apex:param name="p1" value="" assignTo="{!descriptionIndex}"/>
+            </apex:actionFunction>
+            <apex:actionFunction action="{!deleteRow}" name="deleteRow"  status="refresh" reRender="timecardSectionRender">
+                <apex:param name="idx" value="" assignTo="{!deleteRowIndex}" />
+            </apex:actionFunction>
+            <!-- actionStatus Start-->
+            <apex:actionStatus id="refresh">
+                <apex:facet name="start">
+                    <div class="slds-spinner_container" style="position: fixed;" >
+                        <div role="status" class="slds-spinner slds-spinner--large slds-spinner--brand">
+                            <div class="slds-spinner__dot-a"></div>
+                            <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                </apex:facet>
+            </apex:actionStatus>
+            <!-- actionStatus End-->
+            <apex:pageMessages />
+            <!-- pageBlock Start-->
+            <apex:pageBlock >
+                <apex:pageBlockSection >
+                    <apex:inputField value="{!timecardRecord.Week_Start__c}" onchange="refreshTimecard()"/>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Resource"/>
+                        <apex:selectList size="1" value="{!selectedResource}" onchange="refreshTimecard()">
+                            <apex:selectOptions value="{!Resource}"  />
+                        </apex:selectList>
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+            <!-- pageBlock End-->
+            <!-- Table Start -->
+            <apex:outputPanel id="timecardSectionRender" >
+                <table Style = "width : 100%"  Class="timecard-table" id="row">
+                    <tr>
+                        <th>Delete</th>
+                        <th>Project</th>
+                        <th>Disc</th>
+                        <th>{!Month(timecardRecord.Week_Start__c + 1)} / {!Day(timecardRecord.Week_Start__c + 1)} <br/>(Mon)</th>
+                        <th>{!Month(timecardRecord.Week_Start__c + 2)} / {!Day(timecardRecord.Week_Start__c + 2)} <br/>(Tue)</th>
+                        <th>{!Month(timecardRecord.Week_Start__c + 3)} / {!Day(timecardRecord.Week_Start__c + 3)} <br/>(Wed)</th>
+                        <th>{!Month(timecardRecord.Week_Start__c + 4)} / {!Day(timecardRecord.Week_Start__c + 4)} <br/>(Thu)</th>
+                        <th>{!Month(timecardRecord.Week_Start__c + 5)} / {!Day(timecardRecord.Week_Start__c + 5)} <br/>(Fri)</th>
+                        <th>{!Month(timecardRecord.Week_Start__c + 6)} / {!Day(timecardRecord.Week_Start__c + 6)} <br/>(Sat)</th>
+                        <th>{!Month(timecardRecord.Week_Start__c)} / {!Day(timecardRecord.Week_Start__c)} <br/>(Sun)</th>
+                        <th>Total</th>
+                    </tr>
+                    <apex:repeat value="{!lstTimecardModel}" var="ltcm">
+                        <tr>
+                            <td style="text-align:center;">
+                                <span onclick="deleteRow('{!ltcm.index}')" class="del">X</span>
+                            </td>
+                            <td><apex:selectList size="1" value="{!ltcm.selectedProjectResource}">
+                                <apex:selectOptions value="{!Projects}"></apex:selectOptions>
+                                </apex:selectList></td>
+                            <td><img src="{!URLFOR($Resource.timecard_resources)}" width="40px" class="file" onclick="saveDescription('{!ltcm.indexFolder}','{!ltcm.timeRecord.Project_Description__c}'); openDialog('{!ltcm.timeRecord.Project_Description__c}'); return false;"/></td>   
+                            <td ><apex:inputText value="{!ltcm.timeRecord.Hours_Mon__c}" styleClass="inp-hours"/></td>
+                            <td><apex:inputText value="{!ltcm.timeRecord.Hours_Tue__c}"  styleClass="inp-hours"/></td>
+                            <td><apex:inputText value="{!ltcm.timeRecord.Hours_Wed__c}"  styleClass="inp-hours"/></td>
+                            <td><apex:inputText value="{!ltcm.timeRecord.Hours_Thu__c}"  styleClass="inp-hours"/></td>
+                            <td><apex:inputText value="{!ltcm.timeRecord.Hours_Fri__c}"  styleClass="inp-hours"/></td>
+                            <td><apex:inputText value="{!ltcm.timeRecord.Hours_Sat__c}"  styleClass="inp-hours"/></td>
+                            <td><apex:inputText value="{!ltcm.timeRecord.Hours_Sun__c}"  styleClass="inp-hours"/></td>
+                            <td><span class="total-hours"> {!ltcm.totalHours} </span> </td>
+                            <!--    <td> {!ltcm.totalHours}</td>  -{!ltcm.timeRecord.id} -->
+                        </tr>
+                    </apex:repeat>
+                    <tr id="Tot">
+                        <td ></td>
+                        <td colspan="2">Total</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </table>
+            </apex:outputPanel><br/>
+            <!-- Table End -->
+            <!-- Command Button -->
+            <apex:commandButton value="Save" action="{!save}"  reRender="frm" status="refresh" oncomplete="calculateRow();total();"/>
+            <apex:commandButton value="Add Row" action="{!addRow}" reRender="timecardSectionRender" status="refresh" oncomplete="calculateRow();total();"/>
+            <!-- dialog Start-->
+            <div class="dialog">
+                <apex:outputPanel >
+                    <h3>Project Description</h3><br/>
+                    <apex:inputTextarea cols="30" rows="10" value="{!textArea}"  styleClass="textAreaClass"/><br/>
+                    <apex:commandButton value="Submit" onclick="saveDesc();"  action="{!saveDescription}" reRender="dialog"/>
+                    <apex:commandButton value="Cancel" onclick="cancelDesc();" reRender="dialog"/>
+                </apex:outputPanel>
+            </div>
+            <!-- dialog End -->
+        </apex:Form>
+    </div>    
+    <div class="overlay"></div> 
+</apex:page>

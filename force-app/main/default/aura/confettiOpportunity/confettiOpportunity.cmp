@@ -1,0 +1,22 @@
+<aura:component implements="force:appHostable,forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:hasRecordId" access="global" >
+     <lightning:card title="Confetti Opportunity" iconName="standard:opportunity" ></lightning:card>
+    <ltng:require scripts="{!$Resource.Confetti}"/>
+    
+    <aura:attribute name="record" type="Object"/>
+    <aura:attribute name="simpleRecord" type="Object" description="A simplified view object to be displayed"/>
+    <aura:attribute name="error" type="String" description="An error message bound to force:recordData"/>
+    <aura:attribute name="displayCanvas" type="boolean" default="false" />
+    <aura:attribute name="currentVal" type="string" />
+    <aura:attribute name="threshold" type="integer" default="0" required="true"/>
+    <aura:attribute name="winStage" type="string" default="Closed Won" required="true"/>
+   
+    <force:recordData aura:id="forceRecordCmp"
+                      recordId="{!v.recordId}"
+                      fields="Amount,StageName"
+                      mode="VIEW"
+                      targetRecord="{!v.record}"
+                      targetFields="{!v.simpleRecord}"
+                      targetError="{!v.error}" 
+                      recordUpdated="{!c.recordUpdated}"/>
+    
+</aura:component>

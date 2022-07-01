@@ -1,0 +1,22 @@
+<apex:page controller="EditStudentController" lightningStylesheets="true" standardStylesheets="true" >
+    <apex:form >
+        <apex:sectionHeader title="Student" subtitle="Details" />
+         <apex:pagemessages />
+        <apex:pageBlock >
+            <apex:pageBlockSection title="Edit Student Page" collapsible="false"  >
+                <apex:inputField value="{!objStudent.FirstName__c}" />
+                <apex:inputField value="{!objStudent.LastName__c}" />
+                <apex:inputField value="{!objStudent.Email__c}" />
+                <apex:inputField value="{!objStudent.ContactNumber__c}" />
+                <apex:inputField value="{!objStudent.Fee__c}" />
+                <apex:inputField value="{!objStudent.BirthDate__c}" />
+                <apex:inputField value="{!objStudent.States__c}" />
+                <apex:inputField value="{!objStudent.City__c}" />
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons location="Bottom">
+            <apex:commandButton value="Save" action="{!SaveButton}"  onclick="Confirm('Please don't forget to submit!');" />
+            <apex:commandButton value="Cancel" action="{!CanselButton}" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock> 
+    </apex:form>
+</apex:page>

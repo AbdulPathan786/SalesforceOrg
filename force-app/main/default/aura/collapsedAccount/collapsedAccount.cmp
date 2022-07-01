@@ -1,0 +1,87 @@
+<aura:component controller="CollapsedAccountController" implements="flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="accountRecords" type="List"/>    
+    <aura:attribute name="fieldApiNameHorizontal" type="String[]" /> 
+    <aura:attribute name="fieldApiNameVartical" type="String[]" /> 
+    <aura:attribute name="fieldApiNameDetails" type="String[]" /> 
+    
+    <div class=" slds-m-around_small">
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <span class="slds-icon_container slds-icon-standard-contact" title="contact">
+                                <lightning:icon iconName="custom:custom51" title="custom51" />
+                                <span class="slds-assistive-text">Account</span>
+                            </span>
+                        </div>
+                        
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class="slds-page-header__title slds-truncate" title="Rohde Corp - 80,000 Widgets">Account</span>
+                                    </h1>
+                                </div>
+                                
+                            </div>
+                            <p class="slds-page-header__name-meta">Aura Component</p>
+                        </div>
+                        <div class="slds-clearfix">
+                            <div class="slds-float_right">
+                                <lightning:icon iconName="action:refresh" title="refresh" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <lightning:accordion>
+            <lightning:card>
+                <aura:iteration items="{!v.accountRecords}" var="acc" >
+                    <lightning:accordionSection name="{!acc.key}" label="{!(acc.key+'('+acc.values.length+')')}" >
+                        <aura:iteration items="{!acc.values}" var="mapValue" >
+                            <div class="slds-box">
+                                <div class="slds-m-around_small">
+                                    <div class="c-container">
+                                        <lightning:recordForm
+                                                              aura:id="myRecordForm"
+                                                              recordId="{!mapValue.Id}"
+                                                              objectApiName="Account"
+                                                              fields="{!v.fieldApiNameHorizontal}"
+                                                              columns="3"
+                                                              mode="readonly"
+                                                              />
+                                    </div>
+                                    
+                                    <div class="c-container">
+                                        <lightning:recordForm
+                                                              aura:id="myRecordForm"
+                                                              recordId="{!mapValue.Id}"
+                                                              objectApiName="Account"
+                                                              fields="{!v.fieldApiNameVartical}"
+                                                              columns="2"
+                                                              mode="readonly"
+                                                              />
+                                    </div>
+                                    <div class="c-container">
+                                        <lightning:recordForm
+                                                              aura:id="myRecordForm"
+                                                              recordId="{!mapValue.Id}"
+                                                              objectApiName="Account"
+                                                              fields="{!v.fieldApiNameDetails}"
+                                                              columns="1"
+                                                              mode="readonly"
+                                                              />
+                                    </div>
+                                </div>
+                            </div>
+                            <br></br>
+                        </aura:iteration>
+                    </lightning:accordionSection>
+                </aura:iteration>
+            </lightning:card>
+        </lightning:accordion>
+    </div>
+</aura:component>

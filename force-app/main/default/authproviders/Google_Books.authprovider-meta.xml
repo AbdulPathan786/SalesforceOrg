@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuthProvider xmlns="http://soap.sforce.com/2006/04/metadata">
+    <authorizeUrl>https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&amp;prompt=consent</authorizeUrl>
+    <consumerKey>179749514956-nikp3qr97n1vjr32m8jutf7bfu2bc28c.apps.googleusercontent.com</consumerKey>
+    <consumerSecret>lejp2xcMea65Tuo63dw1xvZW45c3WdX0I2KZTigxYNh80qWzlWJRng==</consumerSecret>
+    <defaultScopes>openid</defaultScopes>
+    <friendlyName>Google Books</friendlyName>
+    <includeOrgIdInIdentifier>false</includeOrgIdInIdentifier>
+    <providerType>OpenIdConnect</providerType>
+    <sendAccessTokenInHeader>true</sendAccessTokenInHeader>
+    <sendClientCredentialsInHeader>false</sendClientCredentialsInHeader>
+    <sendSecretInApis>true</sendSecretInApis>
+    <tokenUrl>https://accounts.google.com/o/oauth2/token</tokenUrl>
+</AuthProvider>

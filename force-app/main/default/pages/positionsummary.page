@@ -1,0 +1,129 @@
+<apex:page controller="PositionSummaryController" standardStylesheets="true" lightningStylesheets="true" tabStyle="Position__c" >
+    <apex:form >
+        <apex:sectionHeader title="Positon" subtitle="Details" />
+        
+        <apex:actionFunction name="sendRecordId" action="{!PositionDetailPage}" reRender="pgBlockOne">
+            <apex:param name="p1" value="" assignTo="{!positionId}"/>            
+            <apex:param name="p2" value="" assignTo="{!positionName}"/>            
+        </apex:actionFunction>
+        
+        <apex:pageBlock id="pgBlockOne">
+            <apex:pageBlockSection columns="1" collapsible="true" title="Position Name">
+                <apex:pageBlockTable value="{!lstPosition}" var="lp" >
+                    <apex:column value="{!lp.Name}" />
+                    <apex:column value="{!lp.MinPay__c}" />
+                    <apex:column value="{!lp.MaxPay__c}" />
+                    <apex:column value="{!lp.Status__c}" />
+                    <apex:column value="{!lp.OpenDate__c }" />
+                    <apex:column value="{!lp.CloseDate__c}" />
+                    <apex:column headerValue="Button">
+                        <apex:commandButton value="Delails"  onclick="sendRecordId('{!lp.id}' , '{!lp.Name}'); return false;"  action="{!PositionDetailPage}" />
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <apex:pageBlock >
+            <apex:pageBlockSection columns="1" title=" Total Summary"  >
+                <apex:pageBlockTable value="{!lstSummary}" var="s" >
+                    <apex:column headerValue="Sum of Max Pay"  style="Background-color:green;color:#EFFFFB;font-weight:bold">{!s['Maximum']}</apex:column>
+                    <apex:column headerValue="Sum of Min Pay"  style="Background-color:blue;color:#EFFFFB;font-weight:bold">{!s['Mininum']}</apex:column>
+                    <apex:column headerValue="MaxPay"  style="Background-color:green;color:#EFFFFB;font-weight:bold">{!s['MaxPay']}</apex:column>
+                    <apex:column headerValue="MinPay"  style="Background-color:blue;color:#EFFFFB;font-weight:bold">{!s['MinPay']}</apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection> 
+        </apex:pageBlock>
+        
+    </apex:form>
+</apex:page>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
+<apex:page controller="PositionSummaryController" standardStylesheets="true" lightningStylesheets="true" tabStyle="Position__c">
+    <apex:slds />
+    <apex:form >
+        <apex:sectionHeader title="Position Details"/>
+        <apex:pageBlock >
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Name of Position">Position Title</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="MinPay">Min Pay</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="MaxPay">Max Pay</div>
+                        </th> 
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Status">Status</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Open Date">Open Date</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Close Date">Close Date</div>
+                        </th>
+                        <th class="" scope="col">
+                            <div class="slds-truncate" title="Close Date">Button</div>
+                        </th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <apex:repeat value="{!lstPosition}" var="obj"> 
+                        <tr class="slds-hint-parent">
+                            <td data-label="Position Name">
+                                <div class="slds-truncate" title="Name">{!obj.Name}</div>
+                            </td>
+                            <td data-label="Fee Deposied">
+                                <div class="slds-truncate" title="MinPay">{!obj.MinPay__c}</div>
+                            </td>
+                            <td data-label="Hobbies">
+                                <div class="slds-truncate" title="MaxPay">{!obj.MaxPay__c}</div>
+                            </td>
+                            <td data-label="Hobbies">
+                                <div class="slds-truncate" title="Status">{!obj.Status__c}</div>
+                            </td>
+                            <td data-label="Hobbies">
+                                <div class="slds-truncate" title="OpenDate">{!obj.OpenDate__c}</div>
+                            </td>
+                            <td data-label="Hobbies">
+                                <div class="slds-truncate" title="CloseDate">{!obj.CloseDate__c}</div>
+                            </td>
+                            <td data-label="button">
+                                <div class="slds-truncate" title="Button"></div>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                </tbody>
+                
+                <tFoot>
+                    <apex:repeat value="{!lstSummary}" var="smr"> 
+                        <tr class="slds-line-height_reset">
+                            <td>Count : {!smr['cnt']}</td>
+                            <td>Min Fee : {!smr['MinPay']}</td>
+                            <td>Max Fee : {!smr['MaxPay']}</td>
+                        </tr>
+                    </apex:repeat>
+                </tFoot>
+                
+            </table>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
+-->

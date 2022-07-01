@@ -1,0 +1,26 @@
+<template>
+	<lightning-card title="Contact Pagination Records" icon-name="custom:custom9">
+        <!--  paginationRecordComp start -->
+		<div class="slds-m-around_small">
+			<c-pagination-Record-comp 
+                    currentpage={page} 
+                    onrecordsload={handleRecordsLoad} 
+                    pagesize={pagesize}
+            ></c-pagination-Record-comp>
+        </div>
+         <!--  paginationRecordComp start -->
+        <!-- paginationBottomComp start   -->
+		<div class="slds-m-around_medium">
+			<c-pagination-bottom-comp
+                    onprevious={handlePrevious} 
+                    onnext={handleNext} 
+                    onfirst={handleFirst}  
+                    onlast={handleLast} 
+                    currentpage={page} 
+                    totalrecords={totalrecords} 
+                    pagesize={pagesize}
+            ></c-pagination-bottom-comp>
+        </div>
+        <!-- paginationBottomComp close   -->
+	</lightning-card>
+</template>

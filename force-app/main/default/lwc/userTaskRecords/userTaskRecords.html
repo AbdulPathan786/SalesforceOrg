@@ -1,0 +1,109 @@
+<template>
+    <lightning-card title="User Search Records" icon-name="custom:custom20">
+        <!--Input Search box and button Start -->
+        <div class="slds-p-bottom_large slds-p-left_large" style="width:500px">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <lightning-input data-id="userInput" label="Search User Name" type="search"
+                        placeholder="type here......"></lightning-input>
+                </div>
+                <div class="slds-col button slds-m-top_large">
+                    <lightning-button variant="success" label="Click" onclick={handleClick}></lightning-button>
+                </div>
+            </div>
+        </div>
+        <!-- Input Search box and button Close -->
+        <!--User Records display Start -->
+        <template if:true={isUserRecord}>
+            <template for:each={filterUserRec} for:item="user">
+                <lightning-card key={user.objUser.Id}>
+                    <div class="slds-grid slds-wrap slds-m-around_small">
+                        <div class="slds-col slds-size_1-of-12">
+                            <img src={user.objUser.MediumPhotoUrl} height="40" width="50"></img>
+                        </div>
+                        <div class="slds-col slds-size_2-of-12">
+                            <h1>
+                                <b>{user.objUser.Name}</b>
+                            </h1>
+                            <p>{user.objUser.Email}</p>
+                        </div>
+                        <div class="slds-col slds-size_7-of-12"></div>
+                        <div class="slds-col slds-size_1-of-12">
+                            <span class="slds-badge slds-theme_success">{user.totalTasks}</span>
+                        </div>
+                        <div class="slds-col slds-size_1-of-12">
+                            <lightning-button-icon-stateful value={user.objUser.Id} icon-name="action:new"
+                                onclick={handleTaskRecords} alternative-text="Like"
+                                style="position:relative;right:66px;bottom:4px;">
+                            </lightning-button-icon-stateful>
+                        </div>
+                    </div>
+                    <div class="slds-m-around_small">
+                        <lightning-progress-bar value={user.completedPercentage} size="small"></lightning-progress-bar>
+                    </div>
+                </lightning-card>
+            </template>
+        </template>
+        <!--User Records display Close -->
+        <!-- display message show start -->
+        <template if:false={isUserRecord}>
+            <div class="slds-m-around_small errorcss">
+                <h1>
+                    <b>
+                        <i>User Record Not Found</i>
+                    </b>
+                </h1>
+            </div>
+        </template>
+        <!-- display message close -->
+    </lightning-card>
+    <!--  ===============User Task Record Start / Open Model============== -->
+    <template if:true={dialogOpenbox}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close">
+                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">User Task Records</h2>
+                    <!-- Input type box and save button start -->
+                    <div class="slds-p-bottom_large slds-p-left_large" style="width:700px">
+                        <div class="slds-grid slds-gutters">
+                            <div class="slds-col">
+                                <lightning-input data-id="subject" name="Input" type="text" label="Enter Subject Name"
+                                    placeholder="type here..."></lightning-input>
+                            </div>
+                            <div class="slds-col slds-m-top_large">
+                                <!-- <lightning-button-icon size="x-small" icon-name="action:new" alternative-text="Add Task"
+                                    title="Add Task" onclick={handleSave}></lightning-button-icon>-->
+                                    <lightning-icon icon-name="action:new" alternative-text="Click to Call "
+                                    size="small " title="large size" onclick={handleSave}
+                                    style="position: relative;right: 123px;bottom: 5px;"></lightning-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Input type Box and save button Close  -->
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <!-- Data Table Start -->
+                    <template if:true={taskRecList}>
+                        <lightning-datatable key-field="id" data={taskRecList} columns={columns} hide-checkbox-column
+                            show-row-number-column onrowaction={handleRowAction}></lightning-datatable>
+                    </template>
+                    <!-- Data Table Close -->
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" onclick={cancelButton}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
+<!-- User Task Record End Close model  -->
+</template>

@@ -1,0 +1,37 @@
+<template>
+	<lightning-card>  <hr size="0" noshade/>
+		<template for:each={countries} for:item="country">
+			<li key={country.Id}>
+                    
+				<div class="slds-grid slds-gutters">
+					<div class="slds-col slds-size_3-of-12 slds-m-around_small">
+						<span>
+							<img src={country.flagURL} width="300" height="300"/>
+						</span>
+					</div>
+					<div class="slds-col slds-size_9-of-12">
+						<p>Country   : {country.country}</p>
+                        <p>Continent : {country.continent}</p>
+						<p>population : {country.population}</p>
+						<p>president  : {country.president}</p>
+                            <lightning-input 
+                                data-id ="checkbox"
+                                type="checkbox" 
+                                label="Visited"
+                                value={country.country}
+                               ></lightning-input>
+					</div>
+				</div> 
+			</li>
+		</template>
+
+        <div slot="footer">
+            <lightning-button
+                icon-name="utility:download"
+                label="Submit"
+                onclick={handleClick}
+                >
+            </lightning-button>
+        </div>
+	</lightning-card>
+</template>

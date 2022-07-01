@@ -1,0 +1,30 @@
+<template>
+    <div class="slds-m-around_small">
+        <lightning-card>
+            <div class="slds-m-around_small">
+                <h1><i><b>iBirds Software Services Pvt. Ltd. Ajmer</b></i></h1>
+                <h1><i><b>LWC Assignments : Father Daughter Son Send Message</b></i></h1>
+                <h1><i><b>LWC Assignment No : 5</b></i></h1>
+                <h1><i><b>Owner Name : Abdul Pathan</b></i></h1>
+            </div>
+    <div class="slds-m-around_small">
+        <lightning-card title={fatherName} icon-name="custom:custom9">
+
+            <!-- Below is the Child Component -->
+            <div class="slds-m-around_small">
+                <c-son-component
+                    son-name={sonName}
+                    message={messageSend}
+                ></c-son-component>
+
+                <c-daughter-component
+                    daughter-name={daughterName}
+                    oncallpasstoparent={passToParent}
+                ></c-daughter-component>
+            </div>
+
+     </lightning-card>
+    </div>
+    </lightning-card>
+    </div>
+</template>

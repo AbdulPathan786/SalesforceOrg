@@ -1,0 +1,64 @@
+<template>
+	<div class="slds-grid slds-wrap">
+		<!-- current user Name start -->
+		<div class="slds-col slds-size_12-of-12">
+			<div class="slds-page-header" if:true={objUser}>
+				<div class="slds-page-header__row">
+					<div class="slds-page-header__col-title">
+						<div class="slds-media">
+							<div class="slds-media__figure">
+								<span>
+									<lightning-avatar variant="circle" src={objUser.MediumPhotoUrl} initials="AW"
+										fallback-icon-name="standard:person_account" alternative-text="Amy Weaver"
+										class="slds-m-right_small"></lightning-avatar>
+									<span class="slds-assistive-text">User Name</span>
+								</span>
+							</div>
+							<div class="slds-media__body">
+								<div class="slds-page-header__name">
+									<div class="slds-page-header__name-title">
+										<h1>
+											<span class="slds-page-header__title slds-truncate"
+												title="Rohde Corp - 80,000 Widgets">{objUser.Name}</span>
+										</h1>
+									</div>
+								</div>
+								<p class="slds-page-header__name-meta">Online</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- current user Name end -->
+
+		<!-- current user record List start -->
+		<div class="slds-col slds-size_6-of-12">
+			<template if:true={userRecs.data} for:each={userRecs.data} for:item="user">
+				<lightning-card key={user.Id}>
+					<div class="slds-grid slds-wrap">
+						<div class="slds-col slds-size_1-of-12"></div>
+						<div class="slds-col slds-size_1-of-12">
+							<lightning-avatar variant="circle" src={user.MediumPhotoUrl} initials="AW"
+								fallback-icon-name="standard:person_account" alternative-text="Amy Weaver"
+								class="slds-m-right_small"></lightning-avatar>
+						</div>
+						<div class="slds-col slds-size_3-of-12 pointer" data-id={user.Id} data-name={user.Name}
+							onclick={handleClick}>
+							<h1>
+								<b>{user.Name}</b>
+							</h1>
+						</div>
+						<div class="slds-col slds-size_6-of-12"></div>
+					</div>
+				</lightning-card>
+			</template>
+		</div>
+		<!-- current user record List end -->
+
+		<!--Chat Records-->
+		<div class="slds-col slds-size_6-of-12">
+			<c-chat-app></c-chat-app>
+		</div>
+	</div>
+</template>

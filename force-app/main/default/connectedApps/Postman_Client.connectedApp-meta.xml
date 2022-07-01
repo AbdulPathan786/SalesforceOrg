@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>abdul.hp2904@gmail.com</contactEmail>
+    <label>Postman Client</label>
+    <oauthConfig>
+        <callbackUrl>https://www.postman.com/oauth2/callback</callbackUrl>
+        <consumerKey>3MVG9n_HvETGhr3Brdxh54s2wX4KrIUbF9OxdYs5zMGhPXp4mS7Al3VM5RNWMsPx.pRgxcBqNPYoNUvxEWE0N</consumerKey>
+        <isAdminApproved>false</isAdminApproved>
+        <isConsumerSecretOptional>false</isConsumerSecretOptional>
+        <isIntrospectAllTokens>false</isIntrospectAllTokens>
+        <isSecretRequiredForRefreshToken>false</isSecretRequiredForRefreshToken>
+        <scopes>Api</scopes>
+    </oauthConfig>
+    <oauthPolicy>
+        <ipRelaxation>ENFORCE</ipRelaxation>
+        <refreshTokenPolicy>zero</refreshTokenPolicy>
+    </oauthPolicy>
+    <sessionPolicy>
+        <sessionTimeout>60</sessionTimeout>
+    </sessionPolicy>
+</ConnectedApp>

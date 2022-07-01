@@ -1,0 +1,23 @@
+<apex:page lightningStylesheets="true" controller="AccountSearchPageController" standardStylesheets="true" tabStyle="Account">
+    <apex:sectionHeader title="Account" subtitle="Search"/>
+    <apex:form id="idfirst">
+        <apex:pageBlock >
+            <!-------------  Searching Page Start ---------------------->
+            <apex:pageBlockSection columns="1" collapsible="false">
+                <apex:pageBlockSectionItem >
+                    <apex:inputText value="{!textSearch}" html-placeholder="Account Name"/>
+                    <apex:commandButton value="Search" action="{!searchAccount}" reRender="idfirst"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+             <!-------------  Searching Page End ---------------------->
+            <apex:pageMessages />
+             <!-------------  Table ---------------------->
+            <apex:pageBlockTable value="{!lstAccount}" var="acc" rendered="{!countSelect}">
+                <apex:column value="{!acc.Name}" />
+                <apex:column value="{!acc.Phone}" />
+                <apex:column value="{!acc.Website}" />
+                <apex:column headerValue="Contact Count" value="{!acc.Contacts.size}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

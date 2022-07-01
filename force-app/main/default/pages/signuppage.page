@@ -1,0 +1,66 @@
+<apex:page controller="SignupController" showHeader="false" sidebar="false" standardStylesheets="true" lightningStylesheets="true">
+    <head>
+        <apex:slds />
+    </head>
+    <div class="slds-align_absolute-center"  style="height:30rem">
+        <apex:form >
+            
+            <div class="slds-form_stacked" style="border: 1px solid green">
+                <!-- User Registration hedear Start -->
+                <div style="position:relative;height:30px;width:500px" class="slds-align_absolute-center" >
+                    <div class="slds-builder-center" style="position:relative;height:30px;width:500px" >
+                        <header class="slds-builder-header" style="height:30px">
+                            <div class="slds-align_absolute-center" >User Registration</div>
+                        </header>
+                    </div>
+                </div>
+                <!-- User Registration hedear End -->
+                
+                <!-- User Signup Registration Form Start -->
+                <apex:pageBlock >
+                    <apex:Pagemessages ></apex:Pagemessages>
+                    <div class="slds-form-element " >
+                        <label class="slds-form-element__label" for="text-input-01">
+                            <abbr class="slds-required" title="required">* </abbr>First Name</label>
+                        <div class="slds-form-element__control">
+                            <apex:inputText value="{!objContact.FirstName}" style="width:430px" html-placeholder="Enter First Name"/>
+                            <!--  <input id="text-input-01" class="slds-input" type="text" placeholder="Enter First Name" required="true" value="{!FirstName}"/> -->
+                        </div>
+                    </div>
+                    
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label" for="text-input-01">
+                            <abbr class="slds-required" title="required">* </abbr>Last Name</label>
+                        <div class="slds-form-element__control">
+                            <apex:inputText value="{!objContact.LastName}" style="width:430px" html-placeholder="Enter Last Name"/>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label" for="text-input-01">
+                            <abbr class="slds-required" title="required">* </abbr>Email</label>
+                        <div class="slds-form-element__control">
+                            <apex:inputText value="{!objContact.Email}" style="width:430px" html-placeholder="Enter Email"/>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-form-element">
+                        <label class="slds-form-element__label" for="text-input-01">
+                            <abbr class="slds-required" title="required">* </abbr>Password</label>
+                        <div class="slds-form-element__control">
+                            <apex:inputsecret value="{!objContact.Password__c}" style="width:430px" html-placeholder="Enter Password"/>
+                        </div>
+                    </div>
+                    
+                    
+                    <!-- Command Button -->
+                    <apex:pageBlockButtons location="bottom" >
+                        <apex:commandButton value="Save" action="{!save}" />
+                        <apex:commandButton value="Cancel" action="{!cancel}" />
+                    </apex:pageBlockButtons>
+                </apex:pageBlock>
+                <!-- User Signup Registration Form End -->
+            </div>
+        </apex:form>
+    </div>
+</apex:page>

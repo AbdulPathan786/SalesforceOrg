@@ -1,0 +1,142 @@
+<template>
+    <!-- ===========Contact Record Create ====================================================================== -->
+    <lightning-card title="Contact Records Create" icon-name="custom:custom9">
+        <lightning-layout>
+            <lightning-layout-item size="5">
+                <lightning-input class="slds-p-around_small" data-id="firstName" label="First Name" name="FirstName"
+                    type="text" placeholder="type here...">
+                </lightning-input>
+
+                <lightning-input class="slds-p-around_small"  data-id="email" label="Email" name="Email" type="Email"
+                    placeholder="type here...">
+                </lightning-input>
+                <lightning-input class="slds-p-around_small" data-id="phone" label="Phone Number" type="text" name="Phone"
+                    placeholder="type here...">
+                </lightning-input>
+                <br />
+            </lightning-layout-item>
+
+            <lightning-layout-item size="5">
+                <lightning-input class="slds-p-around_small" data-id="lastName" label="Last Name" name="LastName"
+                    type="text" placeholder="type here..." required>
+                </lightning-input>
+
+
+                <lightning-input class="slds-p-around_small" data-id="city" label="City Name" type="text" name="MailingCity"
+                    placeholder="type here...">
+                </lightning-input>
+              <!--   <lightning-input class="nameCmp" label="Enter Name" type="string"></lightning-input> -->
+                <br />
+            </lightning-layout-item>
+        </lightning-layout>
+
+        <!-- button -->
+        <lightning-button label="Save" variant="Neutral" onclick={saveRecords} slot="actions">
+        </lightning-button>
+        <lightning-button-icon icon-name="utility:refresh" alternative-text="Refresh" onclick={refresh} slot="actions">
+        </lightning-button-icon>
+
+    </lightning-card>
+    <!-- ==============================End====================================================================== -->
+
+
+    <lightning-card title="Contact Records" icon-name="standard:contact">
+        <!-- ============Button======================================================================================== -->
+        <lightning-button variant="success" label="New" title="titleName" onclick={handleClick} slot="actions">
+        </lightning-button>
+        <template if:true={contactRecords}>
+            <!-- ============header======================================================================================== -->
+            <div class="c-container">
+                <lightning-layout vertical-align="center" multiple-rows="true" class="x-large">
+                    <lightning-layout-item flexibility="auto" padding="around-small" class="custom-box" size="2">
+                        <h1><b>S. No.</b></h1>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" padding="around-small" class="custom-box" size="2">
+                        <h1><b>Name</b></h1>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" padding="around-small" class="custom-box" size="2">
+                        <h1><b>Email</b></h1>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" padding="around-small" class="custom-box" size="2">
+                        <h1><b>Phone</b></h1>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" padding="around-small" class="custom-box" size="2">
+                        <h1><b>City</b></h1>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </div>
+            <!-- =============================Records================================================================================ -->
+            <template for:each={contactRecords} for:item="contact">
+                <lightning-layout vertical-align="stretch" multiple-rows="true" class="x-large"
+                    key={contact.contactRecs.Id}>
+
+                    <lightning-layout-item flexibility="auto" padding="around-small" class="custom-box" size="2">
+                        <div class="page-section page-right">
+                            <span class="slds-text-align_left">
+                                <h1>{contact.num}</h1>
+                            </span>
+                        </div>
+                    </lightning-layout-item>
+
+                    <lightning-layout-item flexibility="auto" padding="around-small" class="custom-box" size="2">
+                        <div class="page-section page-right">
+                            <span class="slds-text-align_left">
+                                <h1>{contact.contactRecs.Name}</h1>
+                            </span>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" padding="around-small" class="custom-box" size="2">
+                        <div class="page-section page-right">
+                            <span class="slds-text-align_left">
+                                <h1>{contact.contactRecs.Email}</h1>
+                            </span>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" padding="around-small" class="custom-box" size="2">
+                        <div class="page-section page-right">
+                            <span class="slds-text-align_left">
+                                <h1>{contact.contactRecs.Phone}</h1>
+                            </span>
+                        </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item flexibility="auto" padding="around-small" class="custom-box" size="2">
+                        <div class="page-section page-right">
+                            <span class="slds-text-align_left">
+                                <h1>{contact.contactRecs.MailingCity}</h1>
+                            </span>
+                        </div>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </template>
+        </template>
+    </lightning-card>
+    <!-- ========================Contact Create Model Open=========================================================== -->
+    <template if:true={isModel}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium"
+            aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close">
+                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-011" class="slds-modal__title slds-hyphenate">Contact Record Create</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-01">
+                    <lightning-record-form object-api-name="Contact" layout-type="Full" columns="2"
+                        onsuccess={handleSuccess}>
+                    </lightning-record-form>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button label="Cancel" variant="brand-outline" title="Primary action with lighter look"
+                        onclick={closeModel}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!-- ==================== Contact Create Model Close======================================================================== -->
+</template>

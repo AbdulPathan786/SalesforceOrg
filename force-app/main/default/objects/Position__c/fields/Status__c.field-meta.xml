@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>NewPosition</fullName>
+                <default>true</default>
+                <label>New Position</label>
+            </value>
+            <value>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+                <label>Rejected</label>
+            </value>
+            <value>
+                <fullName>Approved</fullName>
+                <default>false</default>
+                <label>Approved</label>
+            </value>
+            <value>
+                <fullName>PendingApproval</fullName>
+                <default>false</default>
+                <label>Pending Approval</label>
+            </value>
+            <value>
+                <fullName>ClosedNotApproved</fullName>
+                <default>false</default>
+                <label>Closed - Not Approved</label>
+            </value>
+            <value>
+                <fullName>ClosedFilled</fullName>
+                <default>false</default>
+                <label>Closed - Filled</label>
+            </value>
+            <value>
+                <fullName>OpenApproved</fullName>
+                <default>false</default>
+                <label>Open Approved</label>
+            </value>
+            <value>
+                <fullName>ClosedCanceled</fullName>
+                <default>false</default>
+                <label>Closed Canceled</label>
+            </value>
+            <value>
+                <fullName>Pending</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Pending</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

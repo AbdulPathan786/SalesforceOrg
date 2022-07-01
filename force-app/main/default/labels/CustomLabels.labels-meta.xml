@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Contacts</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Contacts</shortDescription>
+        <value>Contact Records</value>
+    </labels>
+    <labels>
+        <fullName>Opportunities</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Opportunities</shortDescription>
+        <value>Opportunities</value>
+    </labels>
+    <labels>
+        <fullName>Tasks</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Tasks</shortDescription>
+        <value>Tasks</value>
+    </labels>
+    <labels>
+        <fullName>attachments</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>attachments</shortDescription>
+        <value>attachments</value>
+    </labels>
+</CustomLabels>

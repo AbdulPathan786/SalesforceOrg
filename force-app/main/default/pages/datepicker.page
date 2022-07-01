@@ -1,0 +1,61 @@
+<apex:page Controller="Datepicker" lightningStylesheets="true">
+    <html>
+        <head>
+            <title>Jquery UI Datepicker Disable Specific Dates Example</title>
+            <link href="http://code.jquery.com/ui/1.9.2/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+            <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+            <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+            <style type="text/css">
+                .container{
+                border-radius: 5px;
+                padding:50px 20px;
+                margin:30px auto;
+                width:25%;
+                border:2px solid #000;
+                text-align: center;
+                }
+                input{
+                padding:5px;
+                }
+                h2{
+                text-align: center;
+                }
+                body{
+                background-color: #81eace;
+                }
+            </style>
+        </head>
+        <body>
+            <h2>Jquery UI Datepicker Disable Specific Dates Example - Nicesnippets.com</h2>
+            <div class="container">
+                <label>Date :</label>
+                <input type='text' class='date'/>
+                <!-- <apex:form >
+<apex:pageMessages id="errors" />
+<apex:pageBlock title="Date Picker Demo 1" mode="edit">
+<apex:inputField value="{!contact.Birthdate}"/>
+</apex:pageBlock>
+</apex:form>-->
+            </div>
+        </body>
+        <script type="text/javascript">
+        //var array = ["24-03-2022","25-03-2022","26-03-2022","28-03-2022"]
+        var array = JSON.parse('{!datesJson}');
+        console.log(array);
+        console.log(array.length);
+        console.log(array[0]);
+        $('input').datepicker({
+            beforeShowDay: function(date){
+                var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                var day = date.getDay();
+                var repeatedDate = date.getDate();
+                var month = date.getMonth(); 
+                var year = date.getFullYear();
+                return [(day != 0 ) && array.indexOf(string) == -1 && (repeatedDate != 5) && (month != 0 || (year != 1 && repeatedDate != 1)) , ''];
+                //return [(day != 0) && array.indexOf(string) == -1 && (month != 0 || (year != 1 && repeatedDate != 1)) , '']; //Disabling sunday, speicific dates and new year first date of every year(recurring date)
+                //return [ array.indexOf(string) == -1 ]
+            }
+        });
+        </script>
+    </html>
+</apex:page>

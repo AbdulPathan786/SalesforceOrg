@@ -1,0 +1,76 @@
+<template>
+    <lightning-card title="Google Books" icon-name="custom:custom9" if:true={itemsDetails}>
+        <lightning-button variant="success" slot="actions" label="Add New Book" title="Non-primary action"
+            onclick={addNewBook} class="slds-m-left_x-small"></lightning-button>
+        <lightning-layout multiple-rows>
+            <template for:each={visibleItems} for:item="book">
+                <div key={book.id} class="slds-m-around_small">
+                    <lightning-button class="slds-align_absolute-center" value={book.id} variant="base"
+                        onclick={bookDelete} icon-name="action:delete">
+                    </lightning-button>
+                    <figure class="snip1527">
+                        <div class="image"><img src={book.volumeInfo.imageLinks.smallThumbnail} alt="pr-sample23" />
+                        </div>
+                        <figcaption>
+                            <div class="date"><span class="day">Date</span><span
+                                    class="month">{book.volumeInfo.publishedDate}</span></div>
+                            <h3>{book.volumeInfo.title}</h3>
+                            <p>{book.volumeInfo.description}</p>
+                        </figcaption>
+                        <a href="#"></a>
+                    </figure>
+                </div>
+            </template>
+        </lightning-layout>
+        <!-- Pagination start-->
+        <div slot="footer" class="slds-var-m-vertical_medium">
+            <c-google-books-pagination records={itemsDetails} onupdate={updateContactHandler}>
+            </c-google-books-pagination>
+        </div>
+        <!-- Pagination start-->
+    </lightning-card>
+
+    <!-- Modals open Search Book and Insert books start-->
+    <template if:true={isStatus}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                        title="Close">
+                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Add A New Books</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_2-of-3">
+                            <lightning-input data-id="bookId" type="text" label="Enter Book Name"
+                                placeholder="type here...">
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_1-of-3" style="margin-top: 23px;">
+                            <lightning-button label="Submit" slot="actions" onclick={onSubmit} variant="brand">
+                            </lightning-button>
+                        </div>
+                    </div>
+                    </br>
+                    <div class="slds-m-around_small">
+                        <lightning-radio-group data-id="newbookId" name="radioGroup" options={lstOptions} value={value}
+                            type="radio" onchange={handleClickRadioButton} class="slds-m-around_small">
+                        </lightning-radio-group>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={cancelButton}>Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={insertNewBook}>Insert New Book</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+    <!-- Modals open Search Book and Insert books end-->
+</template>

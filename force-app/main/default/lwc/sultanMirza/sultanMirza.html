@@ -1,0 +1,49 @@
+<template>
+    <article class="slds-card">
+        <!--Header Start-->
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+                <div class="slds-page-header__col-title">
+                    <div class="slds-media">
+                        <div class="slds-media__figure">
+                            <span class="slds-avatar slds-avatar_circle">
+                                <abbr class="slds-avatar__initials slds-icon-standard-user"
+                                    title="person name">SM</abbr>
+                            </span>
+                        </div>
+                        <div class="slds-media__body">
+                            <div class="slds-page-header__name">
+                                <div class="slds-page-header__name-title">
+                                    <h1>
+                                        <span class="slds-page-header__title slds-truncate"
+                                            title="Rohde Corp - 80,000 Widgets">Sultan Mirza</span>
+                                    </h1>
+                                </div>
+                            </div>
+                            <p class="slds-page-header__name-meta">Sherani Abad</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Header End-->
+        <!-- Child component start -->
+        <div class="slds-box slds-p-around_none slds-m-top_x-small slds-m-bottom_medium slds-m-horizontal_none">
+            <lightning-layout multiple-rows>
+                <lightning-layout-item size="6" padding="around-small">
+                    <div class="custom-box slds-box slds-p-around_medium slds-text-align_left">
+                        <!-- child Aqsa -->
+                        <c-aqsa elisa={elisa} onaqsa={aqsaName} status-elisa={statusElisa}></c-aqsa>
+                    </div>
+                </lightning-layout-item>
+                <lightning-layout-item size="6" padding="around-small">
+                    <div class="custom-box slds-box slds-p-around_medium slds-text-align_left">
+                        <!-- child Elisa -->
+                        <c-elisa aqsa={aqsa} onelisa={elisaName} status-aqsa={statusAqsa}></c-elisa>
+                    </div>
+                </lightning-layout-item>
+            </lightning-layout>
+        </div>
+        <!-- Child component  end -->
+    </article>
+</template>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>qa__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(Account.Rating,
+  &quot;Hot&quot;, 1,
+  &quot;Warm&quot;,  2,
+  &quot;Cold&quot;,  3,
+4)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>qa</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

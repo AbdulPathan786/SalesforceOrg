@@ -1,0 +1,39 @@
+<template>
+    <div class="slds-m-around_small">
+        <lightning-card title="Player Record Details" icon-name="custom:custom7">
+            <template if:true={modalOpen}>
+            <template for:each={playerInfo} for:item="player">
+                <li key={player.Id}>
+                    <lightning-card>
+                    <div class="slds-grid slds-gutters">
+                        <div class="slds-col slds-size_3-of-12 slds-m-horizontal_small">
+                            <span>
+                               <img src={player.ImageUrl__c} width="200" height="200"/>
+                            </span>
+                        </div>
+                        <div class="slds-col slds-size_9-of-12">
+                            <p>First Name : {player.FirstName__c}</p>
+                            <p>Last Name  : {player.LastName__c}</p>
+                            <p>Email : {player.Email__c}</p>
+                            <p>Phone : {player.Phone__c}</p>
+                            <p>Country : {player.Country__c}</p>
+                        </div>
+                    </div> 
+                        <div class="slds-m-around_small">
+                            <lightning-button
+                                label="Close"
+                                name="cmdSend"
+                                value={player.Id}
+                                variant="base"
+                                onclick={closeModal}
+                                slot="footer"
+                            ></lightning-button>
+                        </div>
+                </lightning-card>
+                </li>
+            </template>
+            </template>
+        </lightning-card>
+    </div>
+    
+</template>

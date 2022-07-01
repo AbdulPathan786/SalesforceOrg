@@ -1,0 +1,27 @@
+<apex:page id="pgOne" standardStylesheets="true" lightningStylesheets="true" title="Accounts" name="pgOne" docType="HTML-5.0" Controller="AccountPageController" tabStyle="Account">
+    <apex:form id="pgBlockFirst">
+        <apex:sectionHeader id="pgSectionOne" title="Account" subtitle="Details" description="Accounts Details" rendered="true" help="http://www.google.com">
+            <apex:pageBlock >
+                <apex:pageBlockSection columns="2" collapsible="true" title="Name">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputPanel id="dvName" layout="Block">
+                            Welcome {!accName}
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:inputText value="{!txtSearch}"></apex:inputText>
+                        <apex:commandButton value="Show" action="{!showResult}" reRender="pgBlockFirst" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>            
+            </apex:pageBlock>
+            <apex:PageBlock rendered="{!status}" >
+                <apex:pageBlockTable value="{!lstContact}" var="ct">
+                    <apex:column value="{!ct.firstName}" />
+                    <apex:column value="{!ct.lastName}" />
+                    <apex:column value="{!ct.phone}" />
+                    <apex:column value="{!ct.email}" />
+                </apex:pageBlockTable>
+            </apex:PageBlock>
+        </apex:sectionHeader>
+    </apex:form>
+</apex:page>

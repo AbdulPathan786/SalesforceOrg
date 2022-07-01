@@ -1,0 +1,37 @@
+<apex:page lightningStylesheets="true" standardStylesheets="true" title="Contacts"  Controller="ContactCreateController" tabStyle="Contact">
+    <apex:form id="pageFirst" >
+        <apex:sectionHeader title="New Contact"  subtitle="Contact Edit" rendered="true"/>
+        <apex:pageMessages ></apex:pageMessages>
+        <!----- pageBlock first Start --------->
+        <apex:pageBlock title="Contact" > 
+            <apex:pageBlockButtons location="bottom" >
+                <apex:commandButton value="Save" action="{!SaveButton}" reRender="pageFirst,pageSecond"  />
+                <apex:commandButton value="Cancel" action="{!CancelButton}" reRender="pageFirst,pageSecond" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+        <!----- pageBlock first End --------->
+        <!-- contact Information pageBlock second Start----------->
+        <apex:pageBlock rendered="true" >
+            <apex:pageBlockSection columns="1" collapsible="false" title="Contact Information">
+                <apex:inputText value="{!textAccount}"  label="Account Name" />
+                <apex:inputField value="{!objContact.FirstName}"/>
+                <apex:inputField value="{!objContact.LastName}" required="false" />
+                <apex:inputField value="{!objContact.Email}" />
+                <apex:inputField value="{!objContact.Phone}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock> 
+        <!----- contact Information pageBlock second end --------->
+        
+        <!----- pageBlock third Start --------->
+        <apex:pageBlock rendered="{!Status}" id="pageSecond" >
+            <apex:pageBlockTable value="{!lstContact}" var="ct"  >
+                <apex:column value="{!ct.AccountId}"/>
+                <apex:column value="{!ct.FirstName}"/>
+                <apex:column value="{!ct.LastName}"/>
+                <apex:column value="{!ct.email}" />
+                <apex:column value="{!ct.phone}" />
+            </apex:pageBlockTable>
+        </apex:pageBlock> 
+        <!----- pageBlock third end --------->
+    </apex:form>
+</apex:page>

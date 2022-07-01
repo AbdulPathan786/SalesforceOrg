@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Previous_Task</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND( Completed__c = true,  Previous_Task__r.Completed__c = false)</errorConditionFormula>
+    <errorDisplayField>Previous_Task__c</errorDisplayField>
+    <errorMessage>Previous task not completed</errorMessage>
+</ValidationRule>

@@ -1,0 +1,97 @@
+<template>
+    <lightning-card title="List of Accounts" icon-name="standard:account">
+        <div class="slds-p-bottom_large slds-p-left_large" style="width:500px">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <lightning-input
+                        label="Search City"
+                        name="Input"
+                        data-id ="searchInput" 
+                        type="text"
+                        placeholder="type city here..."
+                    ></lightning-input>
+                </div>
+                <div class="slds-col button">
+                    <lightning-button
+                        label="click"
+                        name="cmdClick"
+                        variant="success"
+                        onclick={handleClick}
+                    ></lightning-button>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <div class="slds-m-around_small">
+            <!--===============Account record Data Table start====================================-->
+            <template if:true={isDataTable}>
+                <template if:true={accountRecord}>
+                    <lightning-datatable
+                        key-field="Id"
+                        data={accountRecord}
+                        columns = {columnsAccount}
+                        onsave={handleSave}
+                        draft-values={draftValues}
+                        hide-checkbox-column
+                        show-row-number-column
+                        onrowaction={handleRowAction}
+                    ></lightning-datatable>
+                </template>
+             </template>
+            <!--===============Account Data table End====================================-->
+              <!--===============Account record not fount start====================================-->
+                <template if:false={isDataTable}>
+                    <div class="slds-align_absolute-center slds-box slds-box_x-small slds-text-heading_medium errorcss">
+                        <h1><b><i>Account Record Not Found</i></b></h1>
+                    </div>
+                </template>
+                <!--===============Account record not fount End====================================-->
+        </div>  
+    </lightning-card>
+
+    <!--  -------- Account Child Record Start ------------------------------ -->
+    <template if:true={openDialogBox}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Close</span>            
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Contacts Records</h2>
+                </header>
+                
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <!-- Data Table -->
+                    <template if:true={childRecord}>
+                        <lightning-datatable
+                            key-field="Id"
+                            data={contactRecords}
+                            show-row-number-column
+                            columns = {columnsContact}
+                            hide-checkbox-column
+                        ></lightning-datatable>
+                    </template>
+                    <template if:false={childRecord}>
+                        <h1>Child Record Not Found</h1>
+                    </template>  
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <lightning-button
+                        name="cmd"
+                        label="Cancel"
+                        slot="footer"
+                        onclick={closeDialogBox}
+                     ></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template> 
+     <!--  -------- Account Child Record End------------------------------ -->
+</template>

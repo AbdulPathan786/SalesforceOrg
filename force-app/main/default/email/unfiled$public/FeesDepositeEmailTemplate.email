@@ -1,0 +1,9 @@
+Mr/Mrs  {!Student__c.LastName__c}
+
+The fees {!Student__c.Fee__c}
+ 
+has been deposites.
+
+Thanks
+
+{!User.CompanyName}

@@ -1,0 +1,14 @@
+<messaging:emailTemplate subject="ProjectTask" recipientType="Contact" relatedToType="Project__c">
+<messaging:htmlEmailBody >
+Dear / Hi ,&nbsp; {!recipient.Name}<br/>
+
+<blockquote>
+  List of Completed Project
+</blockquote>
+<c:projectemailtemplates idProject="{!relatedTo.id}"/>
+
+<b>Regards</b><br/>
+
+System Administration
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

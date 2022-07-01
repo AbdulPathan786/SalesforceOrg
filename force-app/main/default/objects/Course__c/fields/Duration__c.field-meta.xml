@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Duration__c</fullName>
+    <externalId>false</externalId>
+    <label>Duration</label>
+    <required>true</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Fee__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetName>Duration</valueSetName>
+        <valueSettings>
+            <controllingFieldValue>100000</controllingFieldValue>
+            <controllingFieldValue>250000</controllingFieldValue>
+            <controllingFieldValue>35000</controllingFieldValue>
+            <controllingFieldValue>50000</controllingFieldValue>
+            <controllingFieldValue>70000</controllingFieldValue>
+            <valueName>2 Year</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>100000</controllingFieldValue>
+            <controllingFieldValue>250000</controllingFieldValue>
+            <controllingFieldValue>300000</controllingFieldValue>
+            <controllingFieldValue>35000</controllingFieldValue>
+            <controllingFieldValue>50000</controllingFieldValue>
+            <controllingFieldValue>70000</controllingFieldValue>
+            <valueName>3 Year</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>300000</controllingFieldValue>
+            <controllingFieldValue>400000</controllingFieldValue>
+            <valueName>4 Year</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>35000</controllingFieldValue>
+            <valueName>1 Year</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

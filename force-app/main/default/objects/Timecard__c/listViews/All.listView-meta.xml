@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>All</fullName>
+    <columns>NAME</columns>
+    <columns>Project_Resource__c</columns>
+    <columns>Week_Start__c</columns>
+    <columns>Week_End__c</columns>
+    <columns>hours__c</columns>
+    <columns>Hours_Mon__c</columns>
+    <columns>Hours_Tue__c</columns>
+    <columns>Hours_Wed__c</columns>
+    <columns>Hours_Thu__c</columns>
+    <columns>Hours_Fri__c</columns>
+    <columns>Hours_Sat__c</columns>
+    <columns>Hours_Sun__c</columns>
+    <columns>Project_Description__c</columns>
+    <filterScope>Everything</filterScope>
+    <label>All</label>
+</ListView>

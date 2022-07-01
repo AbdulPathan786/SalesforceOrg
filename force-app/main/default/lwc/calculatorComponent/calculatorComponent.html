@@ -1,0 +1,61 @@
+<template>
+   <lightning-card>
+        <div class="slds-m-around_small">
+            <h1><i><b>iBirds Software Services Pvt. Ltd. Ajmer</b></i></h1>
+        <h1><i><b>LWC Assignments :  Calculator</b></i></h1>
+        <h1><i><b>LWC Assignment No : 1</b></i></h1>
+        <h1><i><b>Owner Name : Abdul Pathan</b></i></h1>
+        </div>
+    </lightning-card>
+   <!-- Header and Input Field Start-->
+   <lightning-card title="Calculator" icon-name="standard:apps">
+       <div class="slds-m-around_small">
+           <lightning-input
+                       data-id ="firstNumber" 
+                       type="decimal" 
+                       label="First Number"
+                       placeholder="Enter First Number"
+                       ></lightning-input>
+           <lightning-input
+                       data-id ="secondNumber" 
+                       type="decimal"
+                       label="Second Number"
+                       placeholder="Enter Second Number"
+                       ></lightning-input>
+       </div>
+       <!-- Input Field End -->
+       <!-- Button icon start -->
+       <div class="slds-m-around_small">
+           <lightning-button
+               class="slds-button slds-button_icon"
+               name = "additions"
+               variant = "success"
+               label  = "Add +"
+               onclick = {operation}>
+           </lightning-button>
+           <lightning-button
+               class="slds-button slds-button_icon"
+               name = "substractions"
+               variant = "success"
+               label = "Substract -"
+               onclick = {operation}></lightning-button>
+           <lightning-button
+               class="slds-button slds-button_icon"
+               name = "multiplications"
+               variant = "success"
+               label = "Multiply X"
+               onclick = {operation}></lightning-button>
+           <lightning-button
+               class="slds-button slds-button_icon"
+               name = "divisions"
+               variant = "success"
+               label = "divide /"
+               onclick = {operation}></lightning-button>
+       </div>
+       <!-- button icon end -->
+        <!-- Result -->
+       <div class="slds-align_absolute-center">
+           <h1><b>Result = {output}</b></h1>
+       </div>
+   </lightning-card>
+</template>

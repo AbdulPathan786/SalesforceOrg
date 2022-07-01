@@ -1,0 +1,11 @@
+<apex:page controller="GoogleDriveController" >
+    <apex:slds />
+    <div class="slds-scope">   
+        <apex:form > 
+            <b><center><font size="4" color="blue">Click on button to Save token!</font></center></b><br/>  
+            <center><apex:commandButton reRender="first" value="Records" action="{!fetchRecords}" styleclass="slds-button slds-button_success" /></center><br/>
+            <center><apex:commandButton reRender="second" value="CreateRecord" action="{!createRecords}" styleclass="slds-button slds-button_success" /></center>
+        </apex:form>  
+    </div>  
+    
+</apex:page>

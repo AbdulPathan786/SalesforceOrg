@@ -1,0 +1,39 @@
+<template>
+    <!-- Users Records display Start -->
+    <template if:true={userList}>
+        <template for:each={userList} for:item="user" if:true={status}>
+            <div key={user.objUser.Id}>
+                <div class="slds-grid slds-gutters slds-m-left_small">
+                    <div class="slds-col slds-size_1-of-12">
+                        <img src={user.objUser.MediumPhotoUrl} style="height:50px; margin-left:30px;"></img>
+                    </div>
+                    <div class="slds-col slds-size_2-of-12">
+                        <h1>
+                            <b>{user.objUser.Name}</b>
+                        </h1>
+                        <p>{user.objUser.Email}</p>
+                    </div>
+                    <div class="slds-col slds-size_1-of-12">
+                        <span class="slds-badge slds-theme_success"
+                            style="margin:7px 1px 1px 70px;">{user.totalTasks}</span>
+                    </div>
+                    <div class="slds-col slds-size_1-of-12" style="cursor:pointer;">
+                        <lightning-button-icon-stateful value={user.objUser.Id} icon-name="action:new_task"
+                            onclick={onClickTasks} alternative-text="new_task">
+                        </lightning-button-icon-stateful>
+                    </div>
+                    <div class="slds-col slds-size_7-of-12">
+                    </div>
+                </div>
+                <div class="slds-m-top_xx-small" style="width:450px; margin: 10px 100px 10px 50px;">
+                    <lightning-progress-bar value={user.completedPercentage} size="Large"></lightning-progress-bar>
+                </div>
+            </div>
+        </template>
+        <template if:false={status}>
+            <div class="slds-m-around_small slds-text-heading_large slds-text-color_error">
+                <h1><i>Record Not Found</i></h1>
+            </div>
+        </template>
+    </template>
+</template>

@@ -1,0 +1,125 @@
+<apex:page lightningStylesheets="true" standardStylesheets="false" docType="html-5.0" controller="DistanceRoutePathController">
+    <head>
+        <apex:slds />
+        <apex:includescript value="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" />
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+                <style>
+                .slds-box{
+                    height: 300px;
+                    width: 95%;
+                    display :inline-flex;
+                    background-color: dodgerblue;
+                    padding: 10px 10px 10px 10px; 
+                }
+        .pageClass{
+            font-size:20px;color:White;
+            padding: 0px 20px 20px 40px;
+        }
+        .material-icons{
+            font-size:26px;color:White;
+            padding: 0px 0px 0px 20px;
+        }
+        .inptxt{
+            padding-left: 20px;
+            width: 80%;
+        }
+        .slds-input_bare{
+            bordder: none;
+            height: 30px;
+            width: 200px;
+        }
+        .bottomDiv{
+            font-size:20px;color:Black;
+            background-color: grey;
+            height: 150px;
+            width: 95%;
+            padding: 10px 0px 10px 20px;
+        }
+        .routeDiv{
+            font-size:15px;color:orange;
+        }
+        .time{
+            font-size:15px;color:salmon;
+        }
+        .fastestRoute{
+            font-size:15px;color:Black;
+            font-family:courier;
+        }
+        .totalDistance{
+            font-size:20px;color:tan;
+        }
+        </style>
+        <script>
+            /*  function icon(VehicleSpeed){
+            $(".iconClass").click(function(){
+                var attrclass = $(this).find("i").text();
+                $(".bottomDiv").find("i").text(attrclass);  
+            });
+        } */
+            
+            function icon(VehicleSpeed){
+            $(".iconClass").click(function(){
+                var attrclass = $(this).find("i").text();
+                $(".bottomDiv").find("i").text(attrclass); 
+                var distance = parseFloat($(".totalDistance").text());
+                var time = (parseFloat(distance/VehicleSpeed).toFixed(2)).toString();
+                var strTime = parseInt(time).toString();
+                strTime += time.split(strTime+".") + " min";
+                strTime = strTime.replace(",", " h ")
+                $(".time ").text(strTime);
+            });
+        }
+        </script>
+    </head>
+    <apex:form id="frm">
+        <apex:actionFunction name="Call" action="{!distanceRouteBetween}" reRender="frm">
+        </apex:actionFunction>
+        <!---------------- slds-box start ------------------>
+        <div class="slds-box" >
+            <apex:outputLabel >
+                <div class="pageClass">
+                    <span><apex:commandLink onclick="icon(70); return false;" styleClass="iconClass" >
+                        <i class="material-icons">&#xe52f;</i></apex:commandLink>
+                    </span> 
+                    <span> <apex:commandLink onclick="icon(10); return false;"  styleClass="iconClass" >
+                        <i class="material-icons">&#xe536;</i></apex:commandLink>
+                    </span> 
+                    <span><apex:commandLink onclick="icon(140); return false;"  styleClass="iconClass" >
+                        <i class="material-icons">&#xe559;</i></apex:commandLink>
+                    </span> 
+                    <span>
+                        <apex:commandLink onclick="icon(200); return false;"  styleClass="iconClass">
+                            <i class="material-icons"  >&#xe533;</i>
+                        </apex:commandLink>
+                    </span> 
+                    <span> <apex:commandLink onclick="icon(250); return false;"  styleClass="iconClass">
+                        <i class="material-icons">&#xe539;</i></apex:commandLink>
+                    </span> 
+                    <br/> <br/>
+                    <!--------------------- input Text Start  -------------------->
+                    <div class="inptxt">
+                        <apex:inputText styleClass="slds-input_bare"  html-placeholder="Choose starting point..." value="{!source}"  onchange="Call()" style="background-color:dodgerblue"/><br/><br/>
+                    </div>
+                    <div class="inptxt">
+                        <apex:inputText styleClass="slds-input_bare"  html-placeholder="Choose destination..." value="{!destination}" onchange="Call()" style="background-color:dodgerblue" />
+                    </div>
+                    <!-------------------- input Text End  ----------------------->
+                </div>
+            </apex:outputLabel>
+        </div>  
+        <!------------------ slds-box End ---------------------------->
+        <!----------------- bottomDiv start --------------------->
+        <apex:repeat value="{!mapStation}" var="mainRoute" >
+            <div class="bottomDiv" >
+                <i class="material-icons">&#xe52f;</i> &nbsp;&nbsp; 
+                <apex:outputLabel styleClass="routeDiv" value="{!mainRoute}"></apex:outputLabel>
+                <div class="time">{!timeValue}</div>
+                <div class="fastestRoute" style="float:left">{!fastRoute}</div><br/>
+                <div class="totalDistance" style="float:center"><apex:outputLabel value="{!mapStation[mainRoute]}"/>km</div>
+            </div>
+        </apex:repeat>
+        <!------------------------- bottomDiv End -------------------> 
+    </apex:form>
+</apex:page>

@@ -1,0 +1,86 @@
+<template>
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <div class="slds-grid">
+                        <div class="slds-col" style="width:500px">
+                            <span>
+                                <lightning-input data-id="subjectInput" placeholder="Subject..." required="true"
+                                    type="text"></lightning-input>
+                            </span>
+                        </div>
+                        <div class="slds-col" style="margin:22px 200px 5px 15px; cursor:pointer;">
+                            <span>
+                                <lightning-icon icon-name="action:new" alternative-text="new" size="xx-small "
+                                    title="Create Task" onclick={createTask}></lightning-icon>
+                            </span>
+                        </div>
+                    </div>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <template if:true={taskList}>
+                        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                            <thead>
+                                <tr class="slds-line-height_reset">
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Task Action">Action</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Task Description">Subject</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Task Date">Date</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Task Status">Status</div>
+                                    </th>
+                                    <th class="" scope="col">
+                                        <div class="slds-truncate" title="Task Delete">Delete</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template for:each={taskList} for:item="taskRec" for:index="index">
+                                    <tr class="slds-hint-parent slds-box slds-theme_shade slds-theme_alert-texture" key={taskRec.Id}>
+                                        <td data-label="Task Description" scope="row">
+                                        <template if:true={taskRec.showCheckbox}>
+                                            <input type="checkbox" name="options" onclick={updateTasks}
+                                                data-id={taskRec.Id} style="cursor:pointer;"
+                                                aria-labelledby="check-button-label-01 column-group-header" />
+                                                </template>
+                                        </td>
+                                        <td data-label="Task Description" scope="row">
+                                            <div class="slds-truncate" title="Cloudhub">{taskRec.Subject}</div>
+                                        </td>
+                                        <td data-label="Task Date">
+                                            <div class="slds-truncate" title="Cloudhub">
+                                                <lightning-formatted-date-time value={taskRec.CreatedDate}
+                                                    year="2-digit" month="short" day="2-digit" weekday="long"
+                                                    time-zone="UTC">
+                                                </lightning-formatted-date-time>
+                                            </div>
+                                        </td>
+                                        <td data-label="Task Status">
+                                            <div class="slds-truncate" title="Cloudhub">
+                                                {taskRec.Status}</div>
+                                        </td>
+                                        <td data-label="Task Delete" style="cursor:pointer;">
+                                            <lightning-icon icon-name="action:delete" alternative-text="Delete"
+                                                data-id={taskRec.Id} data-index={index} title="Delete" size="x-small"
+                                                onclick={deleteTask}></lightning-icon>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </template>
+                   
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={cancelButton}>Cancel</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+</template>
